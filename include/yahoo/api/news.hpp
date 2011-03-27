@@ -35,14 +35,14 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(topicname_!="") sort["topicname"]=topicname_;
-						if(category_!="") sort["category"]=category_;
-						if(pickupcategory_!="") sort["pickupcategory"]=pickupcategory_;
-						if(query_!="") sort["query"]=query_;
-						if(relatedinformation_!="") sort["relatedinformation"]=relatedinformation_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
+						if(!topicname_.empty()) sort["topicname"]=topicname_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!pickupcategory_.empty()) sort["pickupcategory"]=pickupcategory_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!relatedinformation_.empty()) sort["relatedinformation"]=relatedinformation_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -89,15 +89,15 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(topicname_!="") sort["topicname"]=topicname_;
-						if(category_!="") sort["category"]=category_;
-						if(query_!="") sort["query"]=query_;
-						if(startdate_!="") sort["startdate"]=startdate_;
-						if(enddate_!="") sort["enddate"]=enddate_;
-						if(unit_!="") sort["unit"]=unit_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
+						if(!topicname_.empty()) sort["topicname"]=topicname_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!startdate_.empty()) sort["startdate"]=startdate_;
+						if(!enddate_.empty()) sort["enddate"]=enddate_;
+						if(!unit_.empty()) sort["unit"]=unit_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -142,13 +142,13 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(topicname_!="") sort["topicname"]=topicname_;
-						if(category_!="") sort["category"]=category_;
-						if(query_!="") sort["query"]=query_;
-						if(minpickupnum_!="") sort["minpickupnum"]=minpickupnum_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
+						if(!topicname_.empty()) sort["topicname"]=topicname_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!minpickupnum_.empty()) sort["minpickupnum"]=minpickupnum_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:

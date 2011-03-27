@@ -27,10 +27,10 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(id_!="") sort["id"]=id_;
-						if(path_!="") sort["path"]=path_;
-						if(type_!="") sort["type"]=type_;
-						if(expand_!="") sort["expand"]=expand_;
+						if(!id_.empty()) sort["id"]=id_;
+						if(!path_.empty()) sort["path"]=path_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!expand_.empty()) sort["expand"]=expand_;
 						return sort;
 					}
 				private:
@@ -72,13 +72,13 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(path_!="") sort["path"]=path_;
-						if(new_!="") sort["new"]=new_;
-						if(picks_!="") sort["picks"]=picks_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!path_.empty()) sort["path"]=path_;
+						if(!new_.empty()) sort["new"]=new_;
+						if(!picks_.empty()) sort["picks"]=picks_;
 						return sort;
 					}
 				private:

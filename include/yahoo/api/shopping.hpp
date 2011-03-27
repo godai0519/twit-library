@@ -66,29 +66,29 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(query_!="") sort["query"]=query_;
-						if(jan_!="") sort["jan"]=jan_;
-						if(isbn_!="") sort["isbn"]=isbn_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(product_id_!="") sort["product_id"]=product_id_;
-						if(person_id_!="") sort["person_id"]=person_id_;
-						if(brand_id_!="") sort["brand_id"]=brand_id_;
-						if(store_id_!="") sort["store_id"]=store_id_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(type_!="") sort["type"]=type_;
-						if(price_from_!="") sort["price_from"]=price_from_;
-						if(price_to_!="") sort["price_to"]=price_to_;
-						if(hits_!="") sort["hits"]=hits_;
-						if(offset_!="") sort["offset"]=offset_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(affiliate_from_!="") sort["affiliate_from"]=affiliate_from_;
-						if(affiliate_to_!="") sort["affiliate_to"]=affiliate_to_;
-						if(module_!="") sort["module"]=module_;
-						if(availability_!="") sort["availability"]=availability_;
-						if(discount_!="") sort["discount"]=discount_;
-						if(shipping_!="") sort["shipping"]=shipping_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!jan_.empty()) sort["jan"]=jan_;
+						if(!isbn_.empty()) sort["isbn"]=isbn_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!product_id_.empty()) sort["product_id"]=product_id_;
+						if(!person_id_.empty()) sort["person_id"]=person_id_;
+						if(!brand_id_.empty()) sort["brand_id"]=brand_id_;
+						if(!store_id_.empty()) sort["store_id"]=store_id_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!price_from_.empty()) sort["price_from"]=price_from_;
+						if(!price_to_.empty()) sort["price_to"]=price_to_;
+						if(!hits_.empty()) sort["hits"]=hits_;
+						if(!offset_.empty()) sort["offset"]=offset_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!affiliate_from_.empty()) sort["affiliate_from"]=affiliate_from_;
+						if(!affiliate_to_.empty()) sort["affiliate_to"]=affiliate_to_;
+						if(!module_.empty()) sort["module"]=module_;
+						if(!availability_.empty()) sort["availability"]=availability_;
+						if(!discount_.empty()) sort["discount"]=discount_;
+						if(!shipping_.empty()) sort["shipping"]=shipping_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -151,15 +151,15 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(gender_!="") sort["gender"]=gender_;
-						if(period_!="") sort["period"]=period_;
-						if(generation_!="") sort["generation"]=generation_;
-						if(offset_!="") sort["offset"]=offset_;
-						if(type_!="") sort["type"]=type_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!gender_.empty()) sort["gender"]=gender_;
+						if(!period_.empty()) sort["period"]=period_;
+						if(!generation_.empty()) sort["generation"]=generation_;
+						if(!offset_.empty()) sort["offset"]=offset_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -199,9 +199,9 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["category_id"]=category_id_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -238,10 +238,10 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["itemcode"]=itemcode_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(responsegroup_!="") sort["responsegroup"]=responsegroup_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!responsegroup_.empty()) sort["responsegroup"]=responsegroup_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -282,13 +282,13 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(type_!="") sort["type"]=type_;
-						if(hits_!="") sort["hits"]=hits_;
-						if(offset_!="") sort["offset"]=offset_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!hits_.empty()) sort["hits"]=hits_;
+						if(!offset_.empty()) sort["offset"]=offset_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -338,15 +338,15 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["url"]=url_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(type_!="") sort["type"]=type_;
-						if(hits_!="") sort["hits"]=hits_;
-						if(store_id_!="") sort["store_id"]=store_id_;
-						if(responsegroup_!="") sort["responsegroup"]=responsegroup_;
-						if(affiliate_from_!="") sort["affiliate_from"]=affiliate_from_;
-						if(affiliate_to_!="") sort["affiliate_to"]=affiliate_to_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!hits_.empty()) sort["hits"]=hits_;
+						if(!store_id_.empty()) sort["store_id"]=store_id_;
+						if(!responsegroup_.empty()) sort["responsegroup"]=responsegroup_;
+						if(!affiliate_from_.empty()) sort["affiliate_from"]=affiliate_from_;
+						if(!affiliate_to_.empty()) sort["affiliate_to"]=affiliate_to_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -387,9 +387,9 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["url"]=url_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -426,10 +426,10 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["position"]=position_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -472,14 +472,14 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(event_type_!="") sort["event_type"]=event_type_;
-						if(event_id_!="") sort["event_id"]=event_id_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(hits_!="") sort["hits"]=hits_;
-						if(offset_!="") sort["offset"]=offset_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!event_type_.empty()) sort["event_type"]=event_type_;
+						if(!event_id_.empty()) sort["event_id"]=event_id_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!hits_.empty()) sort["hits"]=hits_;
+						if(!offset_.empty()) sort["offset"]=offset_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -531,17 +531,17 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(jan_!="") sort["jan"]=jan_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(product_id_!="") sort["product_id"]=product_id_;
-						if(person_id_!="") sort["person_id"]=person_id_;
-						if(store_id_!="") sort["store_id"]=store_id_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!jan_.empty()) sort["jan"]=jan_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!product_id_.empty()) sort["product_id"]=product_id_;
+						if(!person_id_.empty()) sort["person_id"]=person_id_;
+						if(!store_id_.empty()) sort["store_id"]=store_id_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -591,12 +591,12 @@ namespace oauth{
 						sort["appid"]=appid_;
 						sort["url"]=url_;
 						sort["query"]=query_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -638,11 +638,11 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["url"]=url_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -690,9 +690,9 @@ namespace oauth{
 						sort["start_at"]=start_at_;
 						sort["end_at"]=end_at_;
 						sort["signature"]=signature_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -742,9 +742,9 @@ namespace oauth{
 						sort["start_at"]=start_at_;
 						sort["end_at"]=end_at_;
 						sort["signature"]=signature_;
-						if(affiliate_type_!="") sort["affiliate_type"]=affiliate_type_;
-						if(affiliate_id_!="") sort["affiliate_id"]=affiliate_id_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!affiliate_type_.empty()) sort["affiliate_type"]=affiliate_type_;
+						if(!affiliate_id_.empty()) sort["affiliate_id"]=affiliate_id_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:

@@ -38,14 +38,14 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(categoryid_!="") sort["categoryid"]=categoryid_;
-						if(condition_!="") sort["condition"]=condition_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(posteddevice_!="") sort["posteddevice"]=posteddevice_;
-						if(start_!="") sort["start"]=start_;
-						if(results_!="") sort["results"]=results_;
-						if(restype_!="") sort["restype"]=restype_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!categoryid_.empty()) sort["categoryid"]=categoryid_;
+						if(!condition_.empty()) sort["condition"]=condition_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!posteddevice_.empty()) sort["posteddevice"]=posteddevice_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!restype_.empty()) sort["restype"]=restype_;
 						return sort;
 					}
 				private:
@@ -73,7 +73,7 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(categoryid_!="") sort["categoryid"]=categoryid_;
+						if(!categoryid_.empty()) sort["categoryid"]=categoryid_;
 						return sort;
 					}
 				private:
@@ -112,13 +112,13 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["condition"]=condition_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(start_!="") sort["start"]=start_;
-						if(results_!="") sort["results"]=results_;
-						if(mobile_flg_!="") sort["mobile_flg"]=mobile_flg_;
-						if(image_flg_!="") sort["image_flg"]=image_flg_;
-						if(output_!="") sort["output"]=output_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!mobile_flg_.empty()) sort["mobile_flg"]=mobile_flg_;
+						if(!image_flg_.empty()) sort["image_flg"]=image_flg_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -164,13 +164,13 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["question_id"]=question_id_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(answer_id_!="") sort["answer_id"]=answer_id_;
-						if(start_!="") sort["start"]=start_;
-						if(results_!="") sort["results"]=results_;
-						if(use_title_!="") sort["use_title"]=use_title_;
-						if(image_type_!="") sort["image_type"]=image_type_;
-						if(output_!="") sort["output"]=output_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!answer_id_.empty()) sort["answer_id"]=answer_id_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!use_title_.empty()) sort["use_title"]=use_title_;
+						if(!image_type_.empty()) sort["image_type"]=image_type_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -215,14 +215,14 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["content"]=content_;
-						if(mobile_uid_!="") sort["mobile_uid"]=mobile_uid_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(coin_!="") sort["coin"]=coin_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(image_!="") sort["image"]=image_;
-						if(code_!="") sort["code"]=code_;
-						if(request_flg_!="") sort["request_flg"]=request_flg_;
-						if(output_!="") sort["output"]=output_;
+						if(!mobile_uid_.empty()) sort["mobile_uid"]=mobile_uid_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!coin_.empty()) sort["coin"]=coin_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!image_.empty()) sort["image"]=image_;
+						if(!code_.empty()) sort["code"]=code_;
+						if(!request_flg_.empty()) sort["request_flg"]=request_flg_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -267,14 +267,14 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["content"]=content_;
-						if(mobile_uid_!="") sort["mobile_uid"]=mobile_uid_;
-						if(category_id_!="") sort["category_id"]=category_id_;
-						if(coin_!="") sort["coin"]=coin_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(image_!="") sort["image"]=image_;
-						if(code_!="") sort["code"]=code_;
-						if(request_flg_!="") sort["request_flg"]=request_flg_;
-						if(output_!="") sort["output"]=output_;
+						if(!mobile_uid_.empty()) sort["mobile_uid"]=mobile_uid_;
+						if(!category_id_.empty()) sort["category_id"]=category_id_;
+						if(!coin_.empty()) sort["coin"]=coin_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!image_.empty()) sort["image"]=image_;
+						if(!code_.empty()) sort["code"]=code_;
+						if(!request_flg_.empty()) sort["request_flg"]=request_flg_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -310,8 +310,8 @@ namespace oauth{
 						param_type sort;
 						sort["question_id"]=question_id_;
 						sort["content"]=content_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(output_!="") sort["output"]=output_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -342,8 +342,8 @@ namespace oauth{
 						param_type sort;
 						sort["question_id"]=question_id_;
 						sort["content"]=content_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(output_!="") sort["output"]=output_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -379,9 +379,9 @@ namespace oauth{
 						sort["appid"]=appid_;
 						sort["question_id"]=question_id_;
 						sort["cancel_comment"]=cancel_comment_;
-						if(res_type_!="") sort["res_type"]=res_type_;
-						if(output_!="") sort["output"]=output_;
-						if(image_type_!="") sort["image_type"]=image_type_;
+						if(!res_type_.empty()) sort["res_type"]=res_type_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!image_type_.empty()) sort["image_type"]=image_type_;
 						return sort;
 					}
 				private:
@@ -419,9 +419,9 @@ namespace oauth{
 						sort["appid"]=appid_;
 						sort["question_id"]=question_id_;
 						sort["cancel_comment"]=cancel_comment_;
-						if(res_type_!="") sort["res_type"]=res_type_;
-						if(output_!="") sort["output"]=output_;
-						if(image_type_!="") sort["image_type"]=image_type_;
+						if(!res_type_.empty()) sort["res_type"]=res_type_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!image_type_.empty()) sort["image_type"]=image_type_;
 						return sort;
 					}
 				private:
@@ -456,9 +456,9 @@ namespace oauth{
 						param_type sort;
 						sort["question_id"]=question_id_;
 						sort["answer_id"]=answer_id_;
-						if(comment_!="") sort["comment"]=comment_;
-						if(icon_!="") sort["icon"]=icon_;
-						if(output_!="") sort["output"]=output_;
+						if(!comment_.empty()) sort["comment"]=comment_;
+						if(!icon_.empty()) sort["icon"]=icon_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -498,12 +498,12 @@ namespace oauth{
 						param_type sort;
 						sort["content"]=content_;
 						sort["question_id"]=question_id_;
-						if(answer_id_!="") sort["answer_id"]=answer_id_;
-						if(mobile_uid_!="") sort["mobile_uid"]=mobile_uid_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(image_!="") sort["image"]=image_;
-						if(code_!="") sort["code"]=code_;
-						if(output_!="") sort["output"]=output_;
+						if(!answer_id_.empty()) sort["answer_id"]=answer_id_;
+						if(!mobile_uid_.empty()) sort["mobile_uid"]=mobile_uid_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!image_.empty()) sort["image"]=image_;
+						if(!code_.empty()) sort["code"]=code_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -546,12 +546,12 @@ namespace oauth{
 						param_type sort;
 						sort["content"]=content_;
 						sort["question_id"]=question_id_;
-						if(answer_id_!="") sort["answer_id"]=answer_id_;
-						if(mobile_uid_!="") sort["mobile_uid"]=mobile_uid_;
-						if(is_mobile_!="") sort["is_mobile"]=is_mobile_;
-						if(image_!="") sort["image"]=image_;
-						if(code_!="") sort["code"]=code_;
-						if(output_!="") sort["output"]=output_;
+						if(!answer_id_.empty()) sort["answer_id"]=answer_id_;
+						if(!mobile_uid_.empty()) sort["mobile_uid"]=mobile_uid_;
+						if(!is_mobile_.empty()) sort["is_mobile"]=is_mobile_;
+						if(!image_.empty()) sort["image"]=image_;
+						if(!code_.empty()) sort["code"]=code_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
@@ -591,9 +591,9 @@ namespace oauth{
 						sort["content"]=content_;
 						sort["question_id"]=question_id_;
 						sort["answer_id"]=answer_id_;
-						if(res_type_!="") sort["res_type"]=res_type_;
-						if(output_!="") sort["output"]=output_;
-						if(image_type_!="") sort["image_type"]=image_type_;
+						if(!res_type_.empty()) sort["res_type"]=res_type_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!image_type_.empty()) sort["image_type"]=image_type_;
 						return sort;
 					}
 				private:
@@ -631,9 +631,9 @@ namespace oauth{
 						sort["content"]=content_;
 						sort["question_id"]=question_id_;
 						sort["answer_id"]=answer_id_;
-						if(res_type_!="") sort["res_type"]=res_type_;
-						if(output_!="") sort["output"]=output_;
-						if(image_type_!="") sort["image_type"]=image_type_;
+						if(!res_type_.empty()) sort["res_type"]=res_type_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!image_type_.empty()) sort["image_type"]=image_type_;
 						return sort;
 					}
 				private:

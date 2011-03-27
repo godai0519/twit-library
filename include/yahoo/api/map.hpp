@@ -16,18 +16,18 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(query_!="") sort["query"]=query_;
-						if(ei_!="") sort["ei"]=ei_;
-						if(lat_!="") sort["lat"]=lat_;
-						if(lon_!="") sort["lon"]=lon_;
-						if(datum_!="") sort["datum"]=datum_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(bbox_!="") sort["bbox"]=bbox_;
-						if(start_!="") sort["start"]=start_;
-						if(results_!="") sort["results"]=results_;
-						if(page_!="") sort["page"]=page_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!ei_.empty()) sort["ei"]=ei_;
+						if(!lat_.empty()) sort["lat"]=lat_;
+						if(!lon_.empty()) sort["lon"]=lon_;
+						if(!datum_.empty()) sort["datum"]=datum_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!bbox_.empty()) sort["bbox"]=bbox_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!page_.empty()) sort["page"]=page_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -58,8 +58,8 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["coordinates"]=coordinates_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -81,8 +81,8 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["coordinates"]=coordinates_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -103,21 +103,21 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(cid_!="") sort["cid"]=cid_;
-						if(gid_!="") sort["gid"]=gid_;
-						if(query_!="") sort["query"]=query_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(start_!="") sort["start"]=start_;
-						if(results_!="") sort["results"]=results_;
-						if(detail_!="") sort["detail"]=detail_;
-						if(output_!="") sort["output"]=output_;
-						if(lat_!="") sort["lat"]=lat_;
-						if(lon_!="") sort["lon"]=lon_;
-						if(bbox_!="") sort["bbox"]=bbox_;
-						if(dist_!="") sort["dist"]=dist_;
-						if(ac_!="") sort["ac"]=ac_;
-						if(uid_!="") sort["uid"]=uid_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!cid_.empty()) sort["cid"]=cid_;
+						if(!gid_.empty()) sort["gid"]=gid_;
+						if(!query_.empty()) sort["query"]=query_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!detail_.empty()) sort["detail"]=detail_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!lat_.empty()) sort["lat"]=lat_;
+						if(!lon_.empty()) sort["lon"]=lon_;
+						if(!bbox_.empty()) sort["bbox"]=bbox_;
+						if(!dist_.empty()) sort["dist"]=dist_;
+						if(!ac_.empty()) sort["ac"]=ac_;
+						if(!uid_.empty()) sort["uid"]=uid_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -153,10 +153,10 @@ namespace oauth{
 						sort["name"]=name_;
 						sort["lat"]=lat_;
 						sort["lon"]=lon_;
-						if(address_!="") sort["address"]=address_;
-						if(phone_!="") sort["phone"]=phone_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!address_.empty()) sort["address"]=address_;
+						if(!phone_.empty()) sort["phone"]=phone_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -182,11 +182,11 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(ei_!="") sort["ei"]=ei_;
-						if(category_!="") sort["category"]=category_;
-						if(results_!="") sort["results"]=results_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!ei_.empty()) sort["ei"]=ei_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -211,9 +211,9 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["coordinates"]=coordinates_;
-						if(datum_!="") sort["datum"]=datum_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!datum_.empty()) sort["datum"]=datum_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:

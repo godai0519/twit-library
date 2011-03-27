@@ -35,14 +35,14 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(userstr_!="") sort["userstr"]=userstr_;
-						if(keyword_!="") sort["keyword"]=keyword_;
-						if(extract_!="") sort["extract"]=extract_;
-						if(order_!="") sort["order"]=order_;
-						if(start_!="") sort["start"]=start_;
-						if(amount_!="") sort["amount"]=amount_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!userstr_.empty()) sort["userstr"]=userstr_;
+						if(!keyword_.empty()) sort["keyword"]=keyword_;
+						if(!extract_.empty()) sort["extract"]=extract_;
+						if(!order_.empty()) sort["order"]=order_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!amount_.empty()) sort["amount"]=amount_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -82,10 +82,10 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["cert_id"]=cert_id_;
-						if(get_q_!="") sort["get_q"]=get_q_;
-						if(order_number_!="") sort["order_number"]=order_number_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!get_q_.empty()) sort["get_q"]=get_q_;
+						if(!order_number_.empty()) sort["order_number"]=order_number_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -124,8 +124,8 @@ namespace oauth{
 						sort["cert_id"]=cert_id_;
 						sort["qid"]=qid_;
 						sort["answer"]=answer_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:

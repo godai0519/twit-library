@@ -18,13 +18,13 @@ namespace oauth{
 						sort["appid"]=appid_;
 						sort["sentence"]=sentence_;
 						sort["results"]=results_;
-						if(response_!="") sort["response"]=response_;
-						if(filter_!="") sort["filter"]=filter_;
-						if(ma_response_!="") sort["ma_response"]=ma_response_;
-						if(ma_filter_!="") sort["ma_filter"]=ma_filter_;
-						if(uniq_response_!="") sort["uniq_response"]=uniq_response_;
-						if(uniq_filter_!="") sort["uniq_filter"]=uniq_filter_;
-						if(uniq_by_baseform_!="") sort["uniq_by_baseform"]=uniq_by_baseform_;
+						if(!response_.empty()) sort["response"]=response_;
+						if(!filter_.empty()) sort["filter"]=filter_;
+						if(!ma_response_.empty()) sort["ma_response"]=ma_response_;
+						if(!ma_filter_.empty()) sort["ma_filter"]=ma_filter_;
+						if(!uniq_response_.empty()) sort["uniq_response"]=uniq_response_;
+						if(!uniq_filter_.empty()) sort["uniq_filter"]=uniq_filter_;
+						if(!uniq_by_baseform_.empty()) sort["uniq_by_baseform"]=uniq_by_baseform_;
 						return sort;
 					}
 				private:
@@ -52,11 +52,11 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["sentence"]=sentence_;
-						if(format_!="") sort["format"]=format_;
-						if(mode_!="") sort["mode"]=mode_;
-						if(response_!="") sort["response"]=response_;
-						if(dictionary_!="") sort["dictionary"]=dictionary_;
-						if(results_!="") sort["results"]=results_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!mode_.empty()) sort["mode"]=mode_;
+						if(!response_.empty()) sort["response"]=response_;
+						if(!dictionary_.empty()) sort["dictionary"]=dictionary_;
+						if(!results_.empty()) sort["results"]=results_;
 						return sort;
 					}
 				private:
@@ -81,7 +81,7 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["sentence"]=sentence_;
-						if(grade_!="") sort["grade"]=grade_;
+						if(!grade_.empty()) sort["grade"]=grade_;
 						return sort;
 					}
 				private:
@@ -102,8 +102,8 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["sentence"]=sentence_;
-						if(filter_group_!="") sort["filter_group"]=filter_group_;
-						if(no_filter_!="") sort["no_filter"]=no_filter_;
+						if(!filter_group_.empty()) sort["filter_group"]=filter_group_;
+						if(!no_filter_.empty()) sort["no_filter"]=no_filter_;
 						return sort;
 					}
 				private:
@@ -144,8 +144,8 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["sentence"]=sentence_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:

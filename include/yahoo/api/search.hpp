@@ -17,15 +17,15 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(format_!="") sort["format"]=format_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(similar_ok_!="") sort["similar_ok"]=similar_ok_;
-						if(language_!="") sort["language"]=language_;
-						if(country_!="") sort["country"]=country_;
-						if(site_!="") sort["site"]=site_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!similar_ok_.empty()) sort["similar_ok"]=similar_ok_;
+						if(!language_.empty()) sort["language"]=language_;
+						if(!country_.empty()) sort["country"]=country_;
+						if(!site_.empty()) sort["site"]=site_;
 						return sort;
 					}
 				private:
@@ -54,13 +54,13 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(format_!="") sort["format"]=format_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(coloration_!="") sort["coloration"]=coloration_;
-						if(site_!="") sort["site"]=site_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!coloration_.empty()) sort["coloration"]=coloration_;
+						if(!site_.empty()) sort["site"]=site_;
 						return sort;
 					}
 				private:
@@ -87,12 +87,12 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(format_!="") sort["format"]=format_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(site_!="") sort["site"]=site_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!site_.empty()) sort["site"]=site_;
 						return sort;
 					}
 				private:
@@ -118,8 +118,8 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -141,12 +141,12 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(term_!="") sort["term"]=term_;
-						if(output_!="") sort["output"]=output_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!term_.empty()) sort["term"]=term_;
+						if(!output_.empty()) sort["output"]=output_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -173,15 +173,15 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(format_!="") sort["format"]=format_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(similar_ok_!="") sort["similar_ok"]=similar_ok_;
-						if(language_!="") sort["language"]=language_;
-						if(country_!="") sort["country"]=country_;
-						if(site_!="") sort["site"]=site_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!similar_ok_.empty()) sort["similar_ok"]=similar_ok_;
+						if(!language_.empty()) sort["language"]=language_;
+						if(!country_.empty()) sort["country"]=country_;
+						if(!site_.empty()) sort["site"]=site_;
 						return sort;
 					}
 				private:
@@ -210,13 +210,13 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(type_!="") sort["type"]=type_;
-						if(results_!="") sort["results"]=results_;
-						if(start_!="") sort["start"]=start_;
-						if(format_!="") sort["format"]=format_;
-						if(adult_ok_!="") sort["adult_ok"]=adult_ok_;
-						if(coloration_!="") sort["coloration"]=coloration_;
-						if(site_!="") sort["site"]=site_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!format_.empty()) sort["format"]=format_;
+						if(!adult_ok_.empty()) sort["adult_ok"]=adult_ok_;
+						if(!coloration_.empty()) sort["coloration"]=coloration_;
+						if(!site_.empty()) sort["site"]=site_;
 						return sort;
 					}
 				private:

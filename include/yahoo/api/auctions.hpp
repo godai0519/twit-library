@@ -16,8 +16,8 @@ namespace oauth{
 					param_type sort() const{
 						param_type sort;
 						sort["appid"]=appid_;
-						if(callback_!="") sort["callback"]=callback_;
-						if(category_!="") sort["category"]=category_;
+						if(!callback_.empty()) sort["callback"]=callback_;
+						if(!category_.empty()) sort["category"]=category_;
 						return sort;
 					}
 				private:
@@ -90,29 +90,29 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["category"]=category_;
-						if(callback_!="") sort["callback"]=callback_;
-						if(page_!="") sort["page"]=page_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(order_!="") sort["order"]=order_;
-						if(store_!="") sort["store"]=store_;
-						if(aucminprice_!="") sort["aucminprice"]=aucminprice_;
-						if(aucmaxprice_!="") sort["aucmaxprice"]=aucmaxprice_;
-						if(aucmin_bidorbuy_price_!="") sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
-						if(aucmax_bidorbuy_price_!="") sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
-						if(escrow_!="") sort["escrow"]=escrow_;
-						if(easypayment_!="") sort["easypayment"]=easypayment_;
-						if(ybank_!="") sort["ybank"]=ybank_;
-						if(new_!="") sort["new"]=new_;
-						if(freeshipping_!="") sort["freeshipping"]=freeshipping_;
-						if(wrappingicon_!="") sort["wrappingicon"]=wrappingicon_;
-						if(buynow_!="") sort["buynow"]=buynow_;
-						if(thumbnail_!="") sort["thumbnail"]=thumbnail_;
-						if(attn_!="") sort["attn"]=attn_;
-						if(english_!="") sort["english"]=english_;
-						if(point_!="") sort["point"]=point_;
-						if(gift_icon_!="") sort["gift_icon"]=gift_icon_;
-						if(item_status_!="") sort["item_status"]=item_status_;
-						if(offer_!="") sort["offer"]=offer_;
+						if(!callback_.empty()) sort["callback"]=callback_;
+						if(!page_.empty()) sort["page"]=page_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!order_.empty()) sort["order"]=order_;
+						if(!store_.empty()) sort["store"]=store_;
+						if(!aucminprice_.empty()) sort["aucminprice"]=aucminprice_;
+						if(!aucmaxprice_.empty()) sort["aucmaxprice"]=aucmaxprice_;
+						if(!aucmin_bidorbuy_price_.empty()) sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
+						if(!aucmax_bidorbuy_price_.empty()) sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
+						if(!escrow_.empty()) sort["escrow"]=escrow_;
+						if(!easypayment_.empty()) sort["easypayment"]=easypayment_;
+						if(!ybank_.empty()) sort["ybank"]=ybank_;
+						if(!new_.empty()) sort["new"]=new_;
+						if(!freeshipping_.empty()) sort["freeshipping"]=freeshipping_;
+						if(!wrappingicon_.empty()) sort["wrappingicon"]=wrappingicon_;
+						if(!buynow_.empty()) sort["buynow"]=buynow_;
+						if(!thumbnail_.empty()) sort["thumbnail"]=thumbnail_;
+						if(!attn_.empty()) sort["attn"]=attn_;
+						if(!english_.empty()) sort["english"]=english_;
+						if(!point_.empty()) sort["point"]=point_;
+						if(!gift_icon_.empty()) sort["gift_icon"]=gift_icon_;
+						if(!item_status_.empty()) sort["item_status"]=item_status_;
+						if(!offer_.empty()) sort["offer"]=offer_;
 						return sort;
 					}
 				private:
@@ -207,29 +207,29 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["sellerID"]=sellerID_;
-						if(callback_!="") sort["callback"]=callback_;
-						if(page_!="") sort["page"]=page_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(order_!="") sort["order"]=order_;
-						if(store_!="") sort["store"]=store_;
-						if(aucminprice_!="") sort["aucminprice"]=aucminprice_;
-						if(aucmaxprice_!="") sort["aucmaxprice"]=aucmaxprice_;
-						if(aucmin_bidorbuy_price_!="") sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
-						if(aucmax_bidorbuy_price_!="") sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
-						if(escrow_!="") sort["escrow"]=escrow_;
-						if(easypayment_!="") sort["easypayment"]=easypayment_;
-						if(ybank_!="") sort["ybank"]=ybank_;
-						if(new_!="") sort["new"]=new_;
-						if(freeshipping_!="") sort["freeshipping"]=freeshipping_;
-						if(wrappingicon_!="") sort["wrappingicon"]=wrappingicon_;
-						if(buynow_!="") sort["buynow"]=buynow_;
-						if(thumbnail_!="") sort["thumbnail"]=thumbnail_;
-						if(attn_!="") sort["attn"]=attn_;
-						if(english_!="") sort["english"]=english_;
-						if(point_!="") sort["point"]=point_;
-						if(gift_icon_!="") sort["gift_icon"]=gift_icon_;
-						if(item_status_!="") sort["item_status"]=item_status_;
-						if(offer_!="") sort["offer"]=offer_;
+						if(!callback_.empty()) sort["callback"]=callback_;
+						if(!page_.empty()) sort["page"]=page_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!order_.empty()) sort["order"]=order_;
+						if(!store_.empty()) sort["store"]=store_;
+						if(!aucminprice_.empty()) sort["aucminprice"]=aucminprice_;
+						if(!aucmaxprice_.empty()) sort["aucmaxprice"]=aucmaxprice_;
+						if(!aucmin_bidorbuy_price_.empty()) sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
+						if(!aucmax_bidorbuy_price_.empty()) sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
+						if(!escrow_.empty()) sort["escrow"]=escrow_;
+						if(!easypayment_.empty()) sort["easypayment"]=easypayment_;
+						if(!ybank_.empty()) sort["ybank"]=ybank_;
+						if(!new_.empty()) sort["new"]=new_;
+						if(!freeshipping_.empty()) sort["freeshipping"]=freeshipping_;
+						if(!wrappingicon_.empty()) sort["wrappingicon"]=wrappingicon_;
+						if(!buynow_.empty()) sort["buynow"]=buynow_;
+						if(!thumbnail_.empty()) sort["thumbnail"]=thumbnail_;
+						if(!attn_.empty()) sort["attn"]=attn_;
+						if(!english_.empty()) sort["english"]=english_;
+						if(!point_.empty()) sort["point"]=point_;
+						if(!gift_icon_.empty()) sort["gift_icon"]=gift_icon_;
+						if(!item_status_.empty()) sort["item_status"]=item_status_;
+						if(!offer_.empty()) sort["offer"]=offer_;
 						return sort;
 					}
 				private:
@@ -328,31 +328,31 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["query"]=query_;
-						if(callback_!="") sort["callback"]=callback_;
-						if(type_!="") sort["type"]=type_;
-						if(category_!="") sort["category"]=category_;
-						if(page_!="") sort["page"]=page_;
-						if(sort_!="") sort["sort"]=sort_;
-						if(order_!="") sort["order"]=order_;
-						if(store_!="") sort["store"]=store_;
-						if(aucminprice_!="") sort["aucminprice"]=aucminprice_;
-						if(aucmaxprice_!="") sort["aucmaxprice"]=aucmaxprice_;
-						if(aucmin_bidorbuy_price_!="") sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
-						if(aucmax_bidorbuy_price_!="") sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
-						if(escrow_!="") sort["escrow"]=escrow_;
-						if(easypayment_!="") sort["easypayment"]=easypayment_;
-						if(ybank_!="") sort["ybank"]=ybank_;
-						if(new_!="") sort["new"]=new_;
-						if(freeshipping_!="") sort["freeshipping"]=freeshipping_;
-						if(wrappingicon_!="") sort["wrappingicon"]=wrappingicon_;
-						if(buynow_!="") sort["buynow"]=buynow_;
-						if(thumbnail_!="") sort["thumbnail"]=thumbnail_;
-						if(attn_!="") sort["attn"]=attn_;
-						if(english_!="") sort["english"]=english_;
-						if(point_!="") sort["point"]=point_;
-						if(gift_icon_!="") sort["gift_icon"]=gift_icon_;
-						if(item_status_!="") sort["item_status"]=item_status_;
-						if(offer_!="") sort["offer"]=offer_;
+						if(!callback_.empty()) sort["callback"]=callback_;
+						if(!type_.empty()) sort["type"]=type_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!page_.empty()) sort["page"]=page_;
+						if(!sort_.empty()) sort["sort"]=sort_;
+						if(!order_.empty()) sort["order"]=order_;
+						if(!store_.empty()) sort["store"]=store_;
+						if(!aucminprice_.empty()) sort["aucminprice"]=aucminprice_;
+						if(!aucmaxprice_.empty()) sort["aucmaxprice"]=aucmaxprice_;
+						if(!aucmin_bidorbuy_price_.empty()) sort["aucmin_bidorbuy_price"]=aucmin_bidorbuy_price_;
+						if(!aucmax_bidorbuy_price_.empty()) sort["aucmax_bidorbuy_price"]=aucmax_bidorbuy_price_;
+						if(!escrow_.empty()) sort["escrow"]=escrow_;
+						if(!easypayment_.empty()) sort["easypayment"]=easypayment_;
+						if(!ybank_.empty()) sort["ybank"]=ybank_;
+						if(!new_.empty()) sort["new"]=new_;
+						if(!freeshipping_.empty()) sort["freeshipping"]=freeshipping_;
+						if(!wrappingicon_.empty()) sort["wrappingicon"]=wrappingicon_;
+						if(!buynow_.empty()) sort["buynow"]=buynow_;
+						if(!thumbnail_.empty()) sort["thumbnail"]=thumbnail_;
+						if(!attn_.empty()) sort["attn"]=attn_;
+						if(!english_.empty()) sort["english"]=english_;
+						if(!point_.empty()) sort["point"]=point_;
+						if(!gift_icon_.empty()) sort["gift_icon"]=gift_icon_;
+						if(!item_status_.empty()) sort["item_status"]=item_status_;
+						if(!offer_.empty()) sort["offer"]=offer_;
 						return sort;
 					}
 				private:
@@ -397,7 +397,7 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["auctionID"]=auctionID_;
-						if(callback_!="") sort["callback"]=callback_;
+						if(!callback_.empty()) sort["callback"]=callback_;
 						return sort;
 					}
 				private:
@@ -418,7 +418,7 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["auctionID"]=auctionID_;
-						if(page_!="") sort["page"]=page_;
+						if(!page_.empty()) sort["page"]=page_;
 						return sort;
 					}
 				private:
@@ -439,7 +439,7 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["auctionID"]=auctionID_;
-						if(page_!="") sort["page"]=page_;
+						if(!page_.empty()) sort["page"]=page_;
 						return sort;
 					}
 				private:
@@ -479,9 +479,9 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["id"]=id_;
-						if(auctionID_!="") sort["auctionID"]=auctionID_;
-						if(author_!="") sort["author"]=author_;
-						if(page_!="") sort["page"]=page_;
+						if(!auctionID_.empty()) sort["auctionID"]=auctionID_;
+						if(!author_.empty()) sort["author"]=author_;
+						if(!page_.empty()) sort["page"]=page_;
 						return sort;
 					}
 				private:
@@ -502,7 +502,7 @@ namespace oauth{
 						: start_(start), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/openWatchList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -519,7 +519,7 @@ namespace oauth{
 						: start_(start), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/closeWatchList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -536,7 +536,7 @@ namespace oauth{
 						: start_(start), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/myBidList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -553,7 +553,7 @@ namespace oauth{
 						: start_(start), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/myWonList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -570,7 +570,7 @@ namespace oauth{
 						: start_(start), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/mySellingList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
+						if(!start_.empty()) sort["start"]=start_;
 						return sort;
 					}
 				private:
@@ -587,8 +587,8 @@ namespace oauth{
 						: start_(start), list_(list), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V2/myCloseList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
-						if(list_!="") sort["list"]=list_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!list_.empty()) sort["list"]=list_;
 						return sort;
 					}
 				private:
@@ -657,9 +657,9 @@ namespace oauth{
 						: start_(start), list_(list), sort_(sort), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V1/myOfferList"){}
 					param_type sort() const{
 						param_type sort;
-						if(start_!="") sort["start"]=start_;
-						if(list_!="") sort["list"]=list_;
-						if(sort_!="") sort["sort"]=sort_;
+						if(!start_.empty()) sort["start"]=start_;
+						if(!list_.empty()) sort["list"]=list_;
+						if(!sort_.empty()) sort["sort"]=sort_;
 						return sort;
 					}
 				private:
@@ -678,7 +678,7 @@ namespace oauth{
 						: auction_id_(auction_id), yahoo_base("GET","http","auctions.yahooapis.jp","/AuctionWebService/V1/deleteMyOfferList"){}
 					param_type sort() const{
 						param_type sort;
-						if(auction_id_!="") sort["auction_id"]=auction_id_;
+						if(!auction_id_.empty()) sort["auction_id"]=auction_id_;
 						return sort;
 					}
 				private:
@@ -765,11 +765,11 @@ namespace oauth{
 						param_type sort;
 						sort["appid"]=appid_;
 						sort["type"]=type_;
-						if(url_!="") sort["url"]=url_;
-						if(sentence_!="") sort["sentence"]=sentence_;
-						if(category_!="") sort["category"]=category_;
-						if(results_!="") sort["results"]=results_;
-						if(output_!="") sort["output"]=output_;
+						if(!url_.empty()) sort["url"]=url_;
+						if(!sentence_.empty()) sort["sentence"]=sentence_;
+						if(!category_.empty()) sort["category"]=category_;
+						if(!results_.empty()) sort["results"]=results_;
+						if(!output_.empty()) sort["output"]=output_;
 						return sort;
 					}
 				private:
