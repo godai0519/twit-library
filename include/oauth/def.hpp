@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+// def.hpp header file
+// twit-library : http://code.google.com/p/twit-library/
+//
+// 使用するdefine/typedef集だよー
+// 解りやすくするために！
+
 #ifndef OAUTH_DEF_HPP
 #define OAUTH_DEF_HPP
 
