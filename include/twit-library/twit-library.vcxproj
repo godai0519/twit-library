@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Main|Win32">
+      <Configuration>Main</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="None|Win32">
+      <Configuration>None</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}</ProjectGuid>
+    <RootNamespace>twitlibrary</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\OpenSSL-Win32\include;C:\boost\include\boost-1_48;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\OpenSSL-Win32\lib\VC\static;C:\boost\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="content\content_base.hpp" />
+    <ClInclude Include="content\binary.hpp" />
+    <ClInclude Include="content\multipart_content_base.hpp" />
+    <ClInclude Include="content\multipart_form_data.hpp" />
+    <ClInclude Include="content\text.hpp" />
+    <ClInclude Include="content\urlencoded.hpp" />
+    <ClInclude Include="detail\client_base.hpp" />
+    <ClInclude Include="detail\oauth_base.hpp" />
+    <ClInclude Include="detail\oauth_version1.hpp" />
+    <ClInclude Include="detail\oauth_version2.hpp" />
+    <ClInclude Include="keys.hpp" />
+    <ClInclude Include="keys\key_base.hpp" />
+    <ClInclude Include="keys\key_version1.hpp" />
+    <ClInclude Include="keys\key_version2.hpp" />
+    <ClInclude Include="protocol.hpp" />
+    <ClInclude Include="protocol\application_layer\layer_base.hpp" />
+    <ClInclude Include="protocol\application_layer\ssl_layer.hpp" />
+    <ClInclude Include="protocol\application_layer\tcp_layer.hpp" />
+    <ClInclude Include="protocol\client.hpp" />
+    <ClInclude Include="protocol\connection_type\async_connection.hpp" />
+    <ClInclude Include="protocol\connection_type\connection_base.hpp" />
+    <ClInclude Include="protocol\connection_type\sync_connection.hpp" />
+    <ClInclude Include="protocol\response_reader\response_container.hpp" />
+    <ClInclude Include="utility.hpp" />
+    <ClInclude Include="utility\authentication.hpp" />
+    <ClInclude Include="version.hpp" />
+    <ClInclude Include="version\v1.hpp" />
+    <ClInclude Include="version\v2.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="client.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
