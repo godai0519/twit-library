@@ -45,7 +45,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\OpenSSL-Win32\include;C:\boost\include\boost-1_48;$(IncludePath)</IncludePath>
+    <IncludePath>C:\OpenSSL-Win32\include;E:\BoostConnect\include;C:\boost\include\boost-1_49;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>C:\OpenSSL-Win32\lib\VC\static;C:\boost\lib;$(LibraryPath)</LibraryPath>
@@ -87,15 +87,6 @@
     <ClInclude Include="keys\key_base.hpp" />
     <ClInclude Include="keys\key_version1.hpp" />
     <ClInclude Include="keys\key_version2.hpp" />
-    <ClInclude Include="protocol.hpp" />
-    <ClInclude Include="protocol\application_layer\layer_base.hpp" />
-    <ClInclude Include="protocol\application_layer\ssl_layer.hpp" />
-    <ClInclude Include="protocol\application_layer\tcp_layer.hpp" />
-    <ClInclude Include="protocol\client.hpp" />
-    <ClInclude Include="protocol\connection_type\async_connection.hpp" />
-    <ClInclude Include="protocol\connection_type\connection_base.hpp" />
-    <ClInclude Include="protocol\connection_type\sync_connection.hpp" />
-    <ClInclude Include="protocol\response_reader\response_container.hpp" />
     <ClInclude Include="utility.hpp" />
     <ClInclude Include="utility\authentication.hpp" />
     <ClInclude Include="version.hpp" />

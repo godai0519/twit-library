@@ -10,7 +10,6 @@
 
 #include <map>
 #include <boost/assign.hpp>
-#include "../protocol/client.hpp"
 #include "../keys/key_version1.hpp"
 #include "../utility/authentication.hpp"
 #include "oauth_base.hpp"
@@ -21,7 +20,7 @@ namespace detail{
 class oauth_version1 : public oauth_base{
 public:
 	typedef oauth::keys::key_version1 Key_Type;
-	oauth_version1(std::shared_ptr<Key_Type> &key,std::shared_ptr<oauth::protocol::client> &client)
+	oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
 	{
 		key_ = key;
 		client_ = client;
@@ -51,13 +50,12 @@ public:
 		}
 
 		boost::system::error_code ec;
-		client_->reset_response();
 		client_->operator() (oauth::utility::get_host(uri),buf,ec);
 
-		const int status_code = client_->get_response()->status_code_;
+		const int status_code = client_->get_response()->status_code;
 		if(200 <= status_code && status_code < 300)
 		{
-			const Param_Type response = oauth::utility::parse_urlencoded(client_->get_response()->body_);
+			const Param_Type response = oauth::utility::parse_urlencoded(client_->get_response()->body);
 			key_->set_access_token (oauth::utility::url_decode(response.at("oauth_token")));
 			key_->set_access_secret(oauth::utility::url_decode(response.at("oauth_token_secret")));
 		}
@@ -89,13 +87,12 @@ public:
 		}
 
 		boost::system::error_code ec;
-		client_->reset_response();
 		client_->operator() (oauth::utility::get_host(uri),buf,ec);
 		
-		const int status_code = client_->get_response()->status_code_;
+		const int status_code = client_->get_response()->status_code;
 		if(200 <= status_code && status_code < 300)
 		{
-			const Param_Type response = oauth::utility::parse_urlencoded(client_->get_response()->body_);
+			const Param_Type response = oauth::utility::parse_urlencoded(client_->get_response()->body);
 			key_->set_access_token (oauth::utility::url_decode(response.at("oauth_token")));
 			key_->set_access_secret(oauth::utility::url_decode(response.at("oauth_token_secret")));
 		}
@@ -103,7 +100,7 @@ public:
 		return;
 	}
 
-	virtual const std::shared_ptr<oauth::protocol::response_reader::response_container> request_urlencoded(const std::string& method,const std::string& uri,const Param_Type& params)
+	virtual const boost::shared_ptr<bstcon::response> request_urlencoded(const std::string& method,const std::string& uri,const Param_Type& params)
 	{
 		const auto parsed_uri = oauth::utility::get_scheme_host_path(uri);
 
@@ -134,7 +131,6 @@ public:
 		}
 
 		boost::system::error_code ec;
-		client_->reset_response();
 		client_->operator() (parsed_uri.get<1>(),buf,ec);
 
 		//const int status_code = client_->get_response()->status_code_;
@@ -150,8 +146,8 @@ public:
 
 protected:
 
-	std::shared_ptr<Key_Type> key_;
-	std::shared_ptr<oauth::protocol::client> client_;
+	boost::shared_ptr<Key_Type> key_;
+	boost::shared_ptr<bstcon::client> client_;
 };
 
 } // namespace detail

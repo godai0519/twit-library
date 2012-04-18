@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <boost/noncopyable.hpp>
+#include <boostconnect/client.hpp>
 
 namespace oauth{
 namespace detail{
@@ -20,6 +21,7 @@ public:
 	oauth_base(){}
 	virtual ~oauth_base(){}
 protected:
+	boost::shared_ptr<bstcon::client> client_;
 };
 
 } // namespace detail
