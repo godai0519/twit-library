@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <boost/noncopyable.hpp>
 #include "oauth_base.hpp"
-#include "../protocol.hpp"
 #include "../keys/key_base.hpp"
 
 namespace oauth{
@@ -20,7 +19,7 @@ namespace oauth{
 template<class OAuth_Version>
 class client : public OAuth_Version::OAuth_Type{
 public:
-	client(std::shared_ptr<typename OAuth_Version::Key_Type> &key_set,std::shared_ptr<oauth::protocol::client> &client)
+	client(boost::shared_ptr<typename OAuth_Version::Key_Type> &key_set,boost::shared_ptr<bstcon::client> &client)
 		: OAuth_Version::OAuth_Type(key_set,client) {}
 	virtual ~client(){}
 };

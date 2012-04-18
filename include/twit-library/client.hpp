@@ -8,8 +8,6 @@
 #ifndef TWIT_LIB_CLIENT
 #define TWIT_LIB_CLIENT
 
-#include "protocol/client.hpp" //í êMóp
-
 #include "detail/oauth_base.hpp"
 #include "detail/oauth_version1.hpp"
 #include "detail/oauth_version2.hpp"
