@@ -217,7 +217,7 @@ const std::string get_nonce()
   static boost::mt19937 gen(static_cast<unsigned long>(std::time(0)));
   static boost::variate_generator<
     boost::mt19937&,boost::uniform_int<unsigned long>
-  > rand(gen,range);	
+  > rand(gen,range);  
   static const unsigned char nonce_base[] = 
   {
     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
@@ -230,37 +230,10 @@ const std::string get_nonce()
   while(nonce_length<12) nonce_length = rand();
 
   std::string nonce="";
-  for(unsigned int i=0;i<nonce_length;++i)	nonce += nonce_base[rand()];
+  for(unsigned int i=0;i<nonce_length;++i)  nonce += nonce_base[rand()];
   
   return nonce;
 }
-  
-//template <class UniformRandomNumberGenerator>
-//const std::string get_nonce(UniformRandomNumberGenerator& gen)
-//{
-//	const unsigned char nonce_base[] = 
-//	{
-//		'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-//		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-//		'1','2','3','4','5','6','7','8','9','0'
-//	};
-//	boost::uniform_int<unsigned long> range(0,62-1);
-//	boost::variate_generator<
-//		boost::mt19937&,boost::uniform_int<unsigned long>
-//	> rand(gen,range);
-//	
-//	unsigned int nonce_length = 0;
-//	while(nonce_length<12) nonce_length = rand();
-//
-//	std::string nonce="";
-//	for(unsigned int i=0;i<nonce_length;++i)	nonce += nonce_base[rand()];
-//	
-//	return nonce;
-//}
-//const std::string get_nonce()
-//{
-//	return get_nonce(boost::mt19937(static_cast<unsigned long>(std::time(0))));
-//}
 
 //KarmaégÇ¶ÇÈÅHÇÃÇ©Ç»
 const std::string get_signature(const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)

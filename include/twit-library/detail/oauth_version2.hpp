@@ -16,16 +16,16 @@ namespace detail{
 
 class oauth_version2 : public oauth_base{
 public:
-	typedef oauth::keys::key_version2 Key_Type;
-	oauth_version2(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
-	{
-		key_ = key;
-		client_ = client;
-	}
-	virtual ~oauth_version2(){}
+  typedef oauth::keys::key_version2 Key_Type;
+  oauth_version2(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
+  {
+    key_ = key;
+    client_ = client;
+  }
+  virtual ~oauth_version2(){}
 protected:
-	boost::shared_ptr<Key_Type> key_;
-	boost::shared_ptr<bstcon::client> client_;
+  boost::shared_ptr<Key_Type> key_;
+  boost::shared_ptr<bstcon::client> client_;
 };
 
 } // namespace detail
