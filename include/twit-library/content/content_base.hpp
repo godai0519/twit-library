@@ -16,12 +16,12 @@ namespace content{
 
 class content_base{
 public:
-	content_base(){}
-	virtual ~content_base(){}
+  content_base(){}
+  virtual ~content_base(){}
 
-	virtual const std::string get_content_type() const { return ""; }
-	virtual const std::map<std::string,std::string> get_addition_param() const { return std::map<std::string,std::string>(); }
-	virtual const std::string get_body() const { return ""; }
+  virtual const std::string get_content_type() const { return ""; }
+  virtual const std::map<std::string,std::string> get_addition_param() const { return std::map<std::string,std::string>(); }
+  virtual const std::string get_body() const { return ""; }
 };
 
 } // namespace content

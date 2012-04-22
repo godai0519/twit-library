@@ -73,6 +73,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="client\common_v1.hpp" />
+    <ClInclude Include="client\twitter.hpp" />
+    <ClInclude Include="client\yahoo.hpp" />
     <ClInclude Include="content\content_base.hpp" />
     <ClInclude Include="content\binary.hpp" />
     <ClInclude Include="content\multipart_content_base.hpp" />

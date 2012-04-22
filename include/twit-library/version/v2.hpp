@@ -16,10 +16,10 @@ namespace version{
 
 class v2{
 public:
-	typedef oauth::detail::oauth_version2	OAuth_Type;
-	typedef oauth::keys::key_version2		Key_Type;
+  typedef oauth::detail::oauth_version2  OAuth_Type;
+  typedef oauth::keys::key_version2      Key_Type;
 private:
-	v2(){}
+  v2(){}
 };
 
 } // namespace version

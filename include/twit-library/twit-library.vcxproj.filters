@@ -28,12 +28,6 @@
     <Filter Include="ヘッダー ファイル\client">
       <UniqueIdentifier>{6c3a1b3c-928b-4c9b-a9b3-50df625dde74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\client\twitter">
-      <UniqueIdentifier>{1208a84f-87f7-4e36-b90d-94f6931377b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\client\yahoo">
-      <UniqueIdentifier>{d07efd53-828b-4e30-adec-588f3d16935e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\content">
       <UniqueIdentifier>{59868790-536e-4a06-b6a3-e220dc4d09ae}</UniqueIdentifier>
     </Filter>
@@ -95,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="content\text.hpp">
       <Filter>ヘッダー ファイル\content</Filter>
+    </ClInclude>
+    <ClInclude Include="client\yahoo.hpp">
+      <Filter>ヘッダー ファイル\client</Filter>
+    </ClInclude>
+    <ClInclude Include="client\twitter.hpp">
+      <Filter>ヘッダー ファイル\client</Filter>
+    </ClInclude>
+    <ClInclude Include="client\common_v1.hpp">
+      <Filter>ヘッダー ファイル\client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

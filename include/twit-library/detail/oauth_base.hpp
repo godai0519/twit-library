@@ -17,11 +17,11 @@ namespace detail{
 
 class oauth_base : boost::noncopyable{
 public:
-	typedef std::map<std::string,std::string> Param_Type;
-	oauth_base(){}
-	virtual ~oauth_base(){}
+  typedef std::map<std::string,std::string> Param_Type;
+  oauth_base(){}
+  virtual ~oauth_base(){}
 protected:
-	boost::shared_ptr<bstcon::client> client_;
+  boost::shared_ptr<bstcon::client> client_;
 };
 
 } // namespace detail

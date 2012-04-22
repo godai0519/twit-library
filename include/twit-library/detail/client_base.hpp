@@ -19,9 +19,9 @@ namespace oauth{
 template<class OAuth_Version>
 class client : public OAuth_Version::OAuth_Type{
 public:
-	client(boost::shared_ptr<typename OAuth_Version::Key_Type> &key_set,boost::shared_ptr<bstcon::client> &client)
-		: OAuth_Version::OAuth_Type(key_set,client) {}
-	virtual ~client(){}
+  client(boost::shared_ptr<typename OAuth_Version::Key_Type> &key_set,boost::shared_ptr<bstcon::client> &client)
+    : OAuth_Version::OAuth_Type(key_set,client) {}
+  virtual ~client(){}
 };
 
 } // namespace oauth
