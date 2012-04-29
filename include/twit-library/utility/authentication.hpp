@@ -17,27 +17,38 @@
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/fusion/include/std_pair.hpp>
-#include <boost/uuid/random_generator.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <boost/bind.hpp>
 
 namespace oauth{
 namespace utility{
 
+
 const int hex_to_dec(const std::string& hex)
 {
-  namespace qi = boost::spirit::qi;
-
-  int dec=0;
-  qi::parse(hex.cbegin(),hex.cend(),qi::hex,dec);
-
+  int dec = 0;
+  for(std::string::const_iterator it = hex.cbegin(); it != hex.cend(); ++it)
+  {
+    dec *= 16;
+    if(*it >= '0' && *it <= '9')
+    {
+      dec += ((*it)-'0');
+    }
+    else if(*it >= 'A' && *it <= 'F')
+    {
+      dec += ((*it)-'A'+10);
+    }
+    else if(*it >= 'a' && *it <= 'f')
+    {
+      dec += ((*it)-'a'+10);
+    }
+  }
   return dec;
-
 }
+
 const std::string url_encode(const std::string& base_string)
 {
   std::string encoded="";
-  for(std::string::const_iterator it = base_string.begin();it!=base_string.end();++it)
+  for(std::string::const_iterator it = base_string.cbegin();it!=base_string.cend();++it)
   {
     if((0x30<=*it && *it<=0x39) || (0x41<=*it && *it<=0x5A) || (0x61<=*it && *it<= 0x7A) || *it==0x2D || *it==0x2E || *it==0x5F || *it==0x7E)
       encoded.append(it,it+1);
@@ -300,21 +311,21 @@ const boost::tuple<std::string,std::string,std::string> get_scheme_host_path(con
     +(qi::char_ - ":") >> qi::lit(":") >> *qi::lit("/") >> +(qi::char_ - "/") >> +(qi::char_ - "?");
 
   std::string::const_iterator it = uri.cbegin();
-  std::string host,path,params="";
-  qi::parse(it,uri.cend(),rule,host,path,params);
+  std::string scheme="",host="",path="";
+  qi::parse(it,uri.cend(),rule,scheme,host,path);
 
-  return boost::tuple<std::string,std::string,std::string>(host,path,params);
+  return boost::tuple<const std::string,const std::string,const std::string>(scheme,host,path);
 }
 
-const std::string get_scheme(const std::string& uri)
+inline const std::string get_scheme(const std::string& uri)
 {
   return get_scheme_host_path(uri).get<0>();
 }
-const std::string get_host(const std::string& uri)
+inline const std::string get_host(const std::string& uri)
 {
   return get_scheme_host_path(uri).get<1>();
 }
-const std::string get_path(const std::string& uri)
+inline const std::string get_path(const std::string& uri)
 {
   return get_scheme_host_path(uri).get<2>();
 }
