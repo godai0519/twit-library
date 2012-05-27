@@ -5,6 +5,10 @@
 // 認証系機構のutility総集
 //
 
+//
+// ん？全部inline付いてておかしいって？そんなの気にしたら負けだよ！
+//
+
 #ifndef TWIT_LIB_UTILITY_AUTHENTICATION
 #define TWIT_LIB_UTILITY_AUTHENTICATION
 
@@ -23,7 +27,7 @@ namespace oauth{
 namespace utility{
 
 
-const int hex_to_dec(const std::string& hex)
+inline const int hex_to_dec(const std::string& hex)
 {
   int dec = 0;
   for(std::string::const_iterator it = hex.cbegin(); it != hex.cend(); ++it)
@@ -45,7 +49,7 @@ const int hex_to_dec(const std::string& hex)
   return dec;
 }
 
-const std::string url_encode(const std::string& base_string)
+inline const std::string url_encode(const std::string& base_string)
 {
   std::string encoded="";
   for(std::string::const_iterator it = base_string.cbegin();it!=base_string.cend();++it)
@@ -53,13 +57,13 @@ const std::string url_encode(const std::string& base_string)
     if((0x30<=*it && *it<=0x39) || (0x41<=*it && *it<=0x5A) || (0x61<=*it && *it<= 0x7A) || *it==0x2D || *it==0x2E || *it==0x5F || *it==0x7E)
       encoded.append(it,it+1);
     else
-      encoded.append((boost::format("%%%02X") % (int)*it).str());
+      encoded.append((boost::format("%%%02X") % (*it & 0xff)).str());
   }
   return encoded;
 }
 
 // +→' 'にはしない
-const std::string url_decode(const std::string& base_string)
+inline const std::string url_decode(const std::string& base_string)
 {
   std::string decoded="";
   for(std::string::const_iterator it = base_string.begin();it!=base_string.end();++it)
@@ -76,7 +80,7 @@ const std::string url_decode(const std::string& base_string)
 
 
 // std::string::push_back か append かに統一したいなぁ
-const std::string base64_encode(const std::string& data)
+inline const std::string base64_encode(const std::string& data)
 {
   static const char table[] =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -118,7 +122,7 @@ namespace{
   }
 }
 
-std::string sha1_hash(std::string data,unsigned long long length)
+inline std::string sha1_hash(std::string data,unsigned long long length)
 {
   // 0x80を詰める
   data.push_back((char)0x80);
@@ -195,7 +199,7 @@ std::string sha1_hash(std::string data,unsigned long long length)
   return result;
 }
 
-std::string hmac_sha1(const std::string& key,const std::string& data)
+inline std::string hmac_sha1(const std::string& key,const std::string& data)
 {
   std::string k_ipad,k_opad;
   k_ipad = k_opad = (key.length() > 64) ? sha1_hash(key,key.length()) : key;
@@ -216,12 +220,12 @@ std::string hmac_sha1(const std::string& key,const std::string& data)
 }
 
 
-const std::string get_timestamp()
+inline const std::string get_timestamp()
 {
   return (boost::format("%1%") % static_cast<unsigned long>(std::time(0))).str();
 }
 
-const std::string get_nonce()
+inline const std::string get_nonce()
 {
   // initlize
   static const boost::uniform_int<unsigned long> range(0,62-1);
@@ -247,7 +251,7 @@ const std::string get_nonce()
 }
 
 //Karma使える？のかな
-const std::string get_signature(const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)
+inline const std::string get_signature(const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)
 {
   typedef std::pair<const std::string,std::string> Value_Pair;
 
@@ -262,7 +266,7 @@ const std::string get_signature(const std::string& method,const std::string& uri
 }
 
 //get_authorization_fieldとget_urlencodedをまとめられそう．
-const std::string get_authorization_field(const std::map<std::string,std::string>& values)
+inline const std::string get_authorization_field(const std::map<std::string,std::string>& values)
 {
   typedef std::pair<const std::string,std::string> Value_Pair;
 
@@ -274,7 +278,7 @@ const std::string get_authorization_field(const std::map<std::string,std::string
   return field_string;
 }
 
-const std::string get_urlencoded(const std::map<std::string,std::string>& values)
+inline const std::string get_urlencoded(const std::map<std::string,std::string>& values)
 {
   typedef std::pair<const std::string,std::string> Value_Pair;
   
@@ -286,7 +290,7 @@ const std::string get_urlencoded(const std::map<std::string,std::string>& values
   return field_string;
 }
 
-const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
+inline const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
 {
   namespace qi = boost::spirit::qi;
 
@@ -303,7 +307,7 @@ const std::map<std::string,std::string> parse_urlencoded(const std::string& enco
   return parsed;
 }
 
-const boost::tuple<std::string,std::string,std::string> get_scheme_host_path(const std::string& uri)
+inline const boost::tuple<std::string,std::string,std::string> get_scheme_host_path(const std::string& uri)
 {
   namespace qi = boost::spirit::qi;
   
