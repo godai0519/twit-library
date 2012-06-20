@@ -10,8 +10,6 @@
 
 #include <algorithm>
 #include <boost/noncopyable.hpp>
-#include "oauth_base.hpp"
-#include "../keys/key_base.hpp"
 
 namespace oauth{
 

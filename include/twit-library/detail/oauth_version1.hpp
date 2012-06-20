@@ -10,15 +10,17 @@
 
 #include <map>
 #include <boost/assign.hpp>
+#include <boost/noncopyable.hpp>
+#include <boostconnect/client.hpp>
 #include "../keys/key_version1.hpp"
 #include "../utility/authentication.hpp"
-#include "oauth_base.hpp"
 
 namespace oauth{
 namespace detail{
 
-class oauth_version1 : public oauth_base{
+class oauth_version1 : boost::noncopyable{
 public:
+  typedef std::map<std::string,std::string> Param_Type;
   typedef oauth::keys::key_version1 Key_Type;
   oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
   {
