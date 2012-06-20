@@ -39,9 +39,6 @@
     <ClInclude Include="detail\oauth_version2.hpp">
       <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
-    <ClInclude Include="detail\oauth_base.hpp">
-      <Filter>ヘッダー ファイル\detail</Filter>
-    </ClInclude>
     <ClInclude Include="detail\client_base.hpp">
       <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
@@ -49,9 +46,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="keys\key_version1.hpp">
-      <Filter>ヘッダー ファイル\keys</Filter>
-    </ClInclude>
-    <ClInclude Include="keys\key_base.hpp">
       <Filter>ヘッダー ファイル\keys</Filter>
     </ClInclude>
     <ClInclude Include="keys\key_version2.hpp">

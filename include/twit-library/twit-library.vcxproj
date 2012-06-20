@@ -83,11 +83,9 @@
     <ClInclude Include="content\text.hpp" />
     <ClInclude Include="content\urlencoded.hpp" />
     <ClInclude Include="detail\client_base.hpp" />
-    <ClInclude Include="detail\oauth_base.hpp" />
     <ClInclude Include="detail\oauth_version1.hpp" />
     <ClInclude Include="detail\oauth_version2.hpp" />
     <ClInclude Include="keys.hpp" />
-    <ClInclude Include="keys\key_base.hpp" />
     <ClInclude Include="keys\key_version1.hpp" />
     <ClInclude Include="keys\key_version2.hpp" />
     <ClInclude Include="utility.hpp" />
