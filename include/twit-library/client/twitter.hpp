@@ -49,7 +49,7 @@ public:
       ("oauth_consumer_key",key_->get_consumer_key())
       ("oauth_signature_method","HMAC-SHA1")
       ("oauth_timestamp",oauth::utility::get_timestamp())
-      ("oauth_nonce",oauth::utility::get_nonce())
+      ("oauth_nonce",nonce_())
       ("oauth_callback","oob")
       ("oauth_version","1.0")
       ("x_auth_password",password)
@@ -62,13 +62,13 @@ public:
       ("x_auth_mode","client_auth");
 
     boost::assign::insert(params)
-      ("oauth_signature",oauth::utility::get_signature(URL_Set::get_access_method(),client_->service_protocol()+"://"+URL_Set::get_host()+URL_Set::get_access_path(),key_->get_signature_key(),params));
+      ("oauth_signature",signature_(URL_Set::get_access_method(),client_->service_protocol()+"://"+URL_Set::get_host()+URL_Set::get_access_path(),key_->get_signature_key(),params));
 
     params.erase("x_auth_password");
     params.erase("x_auth_username");
     params.erase("x_auth_mode");
 
-    const std::string body = oauth::utility::get_urlencoded(xauth_params);
+    const std::string body = serialize_.get_urlencoded(xauth_params);
 
     boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
     {
@@ -77,7 +77,7 @@ public:
       os << "Host: " << URL_Set::get_host() << "\r\n";
       os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
       os << "Content-Length: " << body.length() << "\r\n";
-      os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(params) << "\r\n\r\n";
+      os << "Authorization: " << "OAuth " << serialize_.get_authorization_field(params) << "\r\n\r\n";
       os << body;
     }
 
