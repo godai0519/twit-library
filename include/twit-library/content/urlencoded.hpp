@@ -18,7 +18,7 @@ namespace content{
 
 class urlencoded : content_base{
 public:
-  typedef std::map<std::string,std::sting> Param_Type;
+  typedef std::map<std::string,std::string> Param_Type;
 
   urlencoded(const Param_Type& body_params) : body_params_(body_params){}
   virtual ~urlencoded(){}

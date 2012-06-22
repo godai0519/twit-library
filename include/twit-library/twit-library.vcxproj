@@ -82,7 +82,6 @@
     <ClInclude Include="content\multipart_form_data.hpp" />
     <ClInclude Include="content\text.hpp" />
     <ClInclude Include="content\urlencoded.hpp" />
-    <ClInclude Include="detail\client_base.hpp" />
     <ClInclude Include="detail\oauth_version1.hpp" />
     <ClInclude Include="detail\oauth_version2.hpp" />
     <ClInclude Include="keys.hpp" />
@@ -90,9 +89,6 @@
     <ClInclude Include="keys\key_version2.hpp" />
     <ClInclude Include="utility.hpp" />
     <ClInclude Include="utility\authentication.hpp" />
-    <ClInclude Include="version.hpp" />
-    <ClInclude Include="version\v1.hpp" />
-    <ClInclude Include="version\v2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="client.hpp" />

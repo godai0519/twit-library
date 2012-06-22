@@ -1,9 +1,8 @@
 #define USE_SSL_BOOSTCONNECT
 
-#include <twit-library/version.hpp>
 #include <twit-library/client.hpp>
 #include <twit-library/client/twitter.hpp>
-#include <twit-library/version/v2.hpp>
+#include <twit-library/client/yahoo.hpp>
 #include <twit-library/keys/key_version2.hpp>
 #include <map>
 #include <vector>
@@ -14,7 +13,7 @@
 //  boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL—p
 //  
 //  boost::shared_ptr<oauth::keys::key_version2> key(
-//    new oauth::keys::key_version2("179248975459720","65054809a265a3539770c04dc101b202"));
+//    new oauth::keys::key_version2("client_id","cient_secret"));
 //
 //  oauth::client<oauth::version::v2> client(key,boost::shared_ptr<bstcon::client>(new bstcon::client(io_service,ctx,bstcon::connection_type::async)));
 //  //const auto str = client.authorization_request_uri("https://www.facebook.com/dialog/oauth","code","https://www.facebook.com/connect/login_success.html");
@@ -25,6 +24,7 @@
 /*#include <boost/thread.hpp>
 #include <boost/property_tree/ptree.hpp>
 */
+
 #include <babel.h>
 
 int main()
@@ -56,18 +56,19 @@ int main()
 //  */
 
   {
+
     boost::asio::io_service io_service;
     boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL—p
 
     boost::shared_ptr<oauth::keys::key_version1> key(
-          new oauth::keys::key_version1("consumer_key","consumer_secret"));
+      new oauth::keys::key_version1("consumer_key","consumer_secret"));
     oauth::twitter client(
       key,
       boost::shared_ptr<bstcon::client>(new bstcon::client(io_service,ctx,bstcon::connection_type::async))
       );
 
     // XAuth
-    client.get_xauth_token("user_id","user_password");
+    client.get_xauth_token("user_id","password");
     io_service.run();
     io_service.reset();
 

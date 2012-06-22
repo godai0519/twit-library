@@ -26,7 +26,6 @@
 namespace oauth{
 namespace utility{
 
-
 inline const int hex_to_dec(const std::string& hex)
 {
   int dec = 0;
@@ -76,43 +75,6 @@ inline const std::string url_decode(const std::string& base_string)
     else decoded += *it;
   }
   return decoded;
-}
-
-
-// std::string::push_back か append かに統一したいなぁ
-inline const std::string base64_encode(const std::string& data)
-{
-  static const char table[] =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-  std::string result;
-  for(std::string::size_type i = 0; i<data.size(); ++i)
-  {
-    switch(i%3)
-    {
-    case 0:
-      result.push_back(table[(data[i] >> 2) & 0x3F/*0011 1111*/]);
-      if(i+1>=data.size())
-      {
-        result.push_back(table[(data[i] << 4) & 0x30/*0011 0000*/]);
-        result.append("==");
-      }
-      break;
-    case 1:
-      result.push_back(table[((data[i-1] << 4) & 0x30/*0011 0000*/) | ((data[i] >> 4) & 0x0F/*0000 1111*/)]);
-      if(i+1>=data.size())
-      {
-        result.push_back(table[(data[i] << 2) & 0x3C/*0011 1100*/]);
-        result.append("=");
-      }
-      break;
-    case 2:
-      result.push_back(table[((data[i-1] << 2) & 0x3C/*0011 1100*/) | ((data[i] >> 6) & 0x03/*0000 0011*/)]);
-      result.push_back(table[data[i] & 0x3F/*0011 1111*/]);
-      break;
-    }
-  }
-  return result;
 }
 
 class sha1{
@@ -229,7 +191,44 @@ typedef hmac<sha1> hmac_sha1;
 template<class Scheme>
 class signature{
   Scheme scheme_;
-public:
+
+public:  
+  // std::string::push_back か append かに統一したいなぁ
+  const std::string base64_encode(const std::string& data)
+  {
+    static const char table[] =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+    std::string result;
+    for(std::string::size_type i = 0; i<data.size(); ++i)
+    {
+      switch(i%3)
+      {
+      case 0:
+        result.push_back(table[(data[i] >> 2) & 0x3F/*0011 1111*/]);
+        if(i+1>=data.size())
+        {
+          result.push_back(table[(data[i] << 4) & 0x30/*0011 0000*/]);
+          result.append("==");
+        }
+        break;
+      case 1:
+        result.push_back(table[((data[i-1] << 4) & 0x30/*0011 0000*/) | ((data[i] >> 4) & 0x0F/*0000 1111*/)]);
+        if(i+1>=data.size())
+        {
+          result.push_back(table[(data[i] << 2) & 0x3C/*0011 1100*/]);
+          result.append("=");
+        }
+        break;
+      case 2:
+        result.push_back(table[((data[i-1] << 2) & 0x3C/*0011 1100*/) | ((data[i] >> 6) & 0x03/*0000 0011*/)]);
+        result.push_back(table[data[i] & 0x3F/*0011 1111*/]);
+        break;
+      }
+    }
+    return result;
+  }
+
   //Karma使える？のかな
   const std::string operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)
   {
@@ -251,86 +250,72 @@ inline const std::string get_timestamp()
   return (boost::format("%1%") % static_cast<unsigned long>(std::time(0))).str();
 }
 
-class nonce{
-  static const boost::uniform_int<unsigned long> range_;
-  static boost::mt19937 gen_;
+template<class Output>
+const Output nonce()
+{
+  static const boost::uniform_int<unsigned long> range(0,62-1);
+  static boost::mt19937 gen(static_cast<unsigned long>(std::time(0)));
   static boost::variate_generator<
     boost::mt19937&,boost::uniform_int<unsigned long>
-  > rand_;
-  
-  static const unsigned char nonce_base_[62];
-
-public:
-  const std::string operator() ()
+  > rand(gen,range);
+  static const unsigned char nonce_base[62] = 
   {
-    // initlize
-  
-    //Calc
-    unsigned int nonce_length = 0;
-    while(nonce_length<12) nonce_length = rand_();
+    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+    '1','2','3','4','5','6','7','8','9','0'
+  };
 
-    std::string nonce="";
-    for(unsigned int i=0;i<nonce_length;++i)  nonce += nonce_base_[rand_()];
-  
-    return nonce;
-  }
-};
+  Output result;
+  unsigned int nonce_length = 0;
 
-const boost::uniform_int<unsigned long> nonce::range_(0,62-1);
-boost::mt19937 nonce::gen_(static_cast<unsigned long>(std::time(0)));
-boost::variate_generator<
-  boost::mt19937&,boost::uniform_int<unsigned long>
-> nonce::rand_(gen_,range_);
-const unsigned char nonce::nonce_base_[62] = 
+  while(nonce_length<12) nonce_length = rand();
+  result.reserve(nonce_length);
+  
+  for(unsigned int i=0;i<nonce_length;++i) result.push_back(nonce_base[rand()]);
+  return result;
+}
+
+//get_authorization_fieldとget_urlencodedをまとめられそう．
+inline const std::string get_authorization_field(const std::map<std::string,std::string>& values)
 {
-  'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-  'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-  '1','2','3','4','5','6','7','8','9','0'
-};
+  typedef std::pair<const std::string,std::string> Value_Pair;
 
-struct serialize{
-  //get_authorization_fieldとget_urlencodedをまとめられそう．
-  const std::string get_authorization_field(const std::map<std::string,std::string>& values) const
-  {
-    typedef std::pair<const std::string,std::string> Value_Pair;
+  std::string field_string = "";
+  BOOST_FOREACH(const Value_Pair& p,values)
+    field_string += (url_encode(p.first) + "=\"" + url_encode(p.second) + "\",");
 
-    std::string field_string = "";
-    BOOST_FOREACH(const Value_Pair& p,values)
-      field_string += (url_encode(p.first) + "=\"" + url_encode(p.second) + "\",");
+  if(!field_string.empty()) field_string.erase(field_string.size()-1);
+  return field_string;
+}
 
-    if(!field_string.empty()) field_string.erase(field_string.size()-1);
-    return field_string;
-  }
-
-  const std::string get_urlencoded(const std::map<std::string,std::string>& values) const
-  {
-    typedef std::pair<const std::string,std::string> Value_Pair;
+inline const std::string get_urlencoded(const std::map<std::string,std::string>& values)
+{
+  typedef std::pair<const std::string,std::string> Value_Pair;
   
-    std::string field_string = "";
-    BOOST_FOREACH(const Value_Pair& p,values)
-      field_string += (url_encode(p.first) + "=" + url_encode(p.second) + "&");
+  std::string field_string = "";
+  BOOST_FOREACH(const Value_Pair& p,values)
+    field_string += (url_encode(p.first) + "=" + url_encode(p.second) + "&");
 
-    if(!field_string.empty()) field_string.erase(field_string.size()-1);
-    return field_string;
-  }
+  if(!field_string.empty()) field_string.erase(field_string.size()-1);
+  return field_string;
+}
 
-  const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded) const
-  {
-    namespace qi = boost::spirit::qi;
+inline const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
+{
+  namespace qi = boost::spirit::qi;
 
-    const auto value_rule = ((+(qi::char_ - "&") >> -qi::lit("&")));
-    const auto pair_rule =
-      +(qi::char_ - "=") >> "=" >> value_rule;
-    const auto rule = 
-      *pair_rule;
+  const auto value_rule = ((+(qi::char_ - "&") >> -qi::lit("&")));
+  const auto pair_rule =
+    +(qi::char_ - "=") >> "=" >> value_rule;
+  const auto rule = 
+    *pair_rule;
   
-    auto it = encoded.cbegin();
-    std::map<std::string,std::string> parsed;
-    qi::parse(it,encoded.cend(),rule,parsed);
+  auto it = encoded.cbegin();
+  std::map<std::string,std::string> parsed;
+  qi::parse(it,encoded.cend(),rule,parsed);
 
-    return parsed;
-  }
-};
+  return parsed;
+}
 
 class uri_parser{
   std::string uri_;

@@ -23,7 +23,7 @@ public:
   //typedef boost::uniform_int<unsigned int> Uniform_Type;
   
   multipart_form_data(const Param_Type& body_params,const std::string& disposition="")
-    : disposition_(disposition),body_params_(body_params),boundary_("-"+oauth::utility::get_nonce())
+    : disposition_(disposition),body_params_(body_params),boundary_("-"+oauth::utility::nonce<std::string>())
   {}
 
   template <class UniformRandomNumberGenerator>
