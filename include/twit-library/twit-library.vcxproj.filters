@@ -19,9 +19,6 @@
     <Filter Include="ヘッダー ファイル\keys">
       <UniqueIdentifier>{3d2aeb7e-0e66-47c8-aa79-c00c12c64272}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\version">
-      <UniqueIdentifier>{110dece1-c278-4322-81b1-88acc789b8ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\utility">
       <UniqueIdentifier>{5e9878c4-9d4c-462b-8ae7-fbf484cd81b6}</UniqueIdentifier>
     </Filter>
@@ -39,9 +36,6 @@
     <ClInclude Include="detail\oauth_version2.hpp">
       <Filter>ヘッダー ファイル\detail</Filter>
     </ClInclude>
-    <ClInclude Include="detail\client_base.hpp">
-      <Filter>ヘッダー ファイル\detail</Filter>
-    </ClInclude>
     <ClInclude Include="keys.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -50,15 +44,6 @@
     </ClInclude>
     <ClInclude Include="keys\key_version2.hpp">
       <Filter>ヘッダー ファイル\keys</Filter>
-    </ClInclude>
-    <ClInclude Include="version\v1.hpp">
-      <Filter>ヘッダー ファイル\version</Filter>
-    </ClInclude>
-    <ClInclude Include="version\v2.hpp">
-      <Filter>ヘッダー ファイル\version</Filter>
-    </ClInclude>
-    <ClInclude Include="version.hpp">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="utility.hpp">
       <Filter>ヘッダー ファイル</Filter>

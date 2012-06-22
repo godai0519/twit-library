@@ -73,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="C:\babel\babel.cpp" />
     <ClCompile Include="sample.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

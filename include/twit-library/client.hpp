@@ -10,6 +10,10 @@
 
 #include "detail/oauth_version1.hpp"
 #include "detail/oauth_version2.hpp"
-#include "detail/client_base.hpp"
+
+namespace oauth{
+  typedef oauth::detail::oauth_version1 client_v1;
+  typedef oauth::detail::oauth_version2 client_v2;
+}
 
 #endif

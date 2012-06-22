@@ -37,7 +37,7 @@ public:
       ("oauth_consumer_key",key_->get_consumer_key())
       ("oauth_signature_method","HMAC-SHA1")
       ("oauth_timestamp",oauth::utility::get_timestamp())
-     // ("oauth_nonce",nonce_())
+      ("oauth_nonce",oauth::utility::nonce<std::string>())
       ("oauth_callback","oob")
       ("oauth_version","1.0");
     
@@ -50,7 +50,7 @@ public:
       os << method << " " << uri_parsed.get_path() << " HTTP/1.1" << "\r\n";
       os << "Host: " << uri_parsed.get_host() << "\r\n";
       os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-      os << "Authorization: " << "OAuth " << serialize_.get_authorization_field(params) << "\r\n\r\n";
+      os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(params) << "\r\n\r\n";
     }
 
     boost::system::error_code ec;
@@ -79,7 +79,7 @@ public:
       ("oauth_signature_method","HMAC-SHA1")
       ("oauth_timestamp",oauth::utility::get_timestamp())
       ("oauth_verifier",pin_code)
-      ("oauth_nonce",nonce_())
+      ("oauth_nonce",oauth::utility::nonce<std::string>())
       ("oauth_version","1.0");
     
     boost::assign::insert(params)
@@ -91,7 +91,7 @@ public:
       os << method << " " << uri_parsed.get_path() << " HTTP/1.1" << "\r\n";
       os << "Host: " << uri_parsed.get_host() << "\r\n";
       os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-      os << "Authorization: " << "OAuth " << serialize_.get_authorization_field(params) << "\r\n\r\n";
+      os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(params) << "\r\n\r\n";
     }
 
     boost::system::error_code ec;
@@ -110,7 +110,7 @@ public:
       ("oauth_token",key_->get_access_token())
       ("oauth_signature_method","HMAC-SHA1")
       ("oauth_timestamp",oauth::utility::get_timestamp())
-      ("oauth_nonce",nonce_())
+      ("oauth_nonce",oauth::utility::nonce<std::string>())
       ("oauth_version","1.0");
 
     Param_Type signature_param = params;
@@ -119,15 +119,15 @@ public:
     boost::assign::insert(header_params)
       ("oauth_signature",signature_(method,uri_parsed.get_scheme()+"://"+uri_parsed.get_host()+uri_parsed.get_path(),key_->get_signature_key(),signature_param));
 
-    const std::string body_string = (method!="GET") ? serialize_.get_urlencoded(params) : "";
+    const std::string body_string = (method!="GET") ? oauth::utility::get_urlencoded(params) : "";
     boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
     {
       std::ostream os(buf.get());
-      os << method << " " << uri_parsed.get_path() << ((method=="GET") ? "?"+serialize_.get_urlencoded(params) : "") << " HTTP/1.1" << "\r\n";
+      os << method << " " << uri_parsed.get_path() << ((method=="GET") ? "?"+oauth::utility::get_urlencoded(params) : "") << " HTTP/1.1" << "\r\n";
       os << "Host: " << uri_parsed.get_host() << "\r\n";
       os << "Content-Length: " << body_string.size() << "\r\n";
       os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-      os << "Authorization: " << "OAuth " << serialize_.get_authorization_field(header_params) << "\r\n\r\n";
+      os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(header_params) << "\r\n\r\n";
       os << body_string;
     }
 
@@ -143,7 +143,7 @@ protected:
     if(ec) return;
     if(200 <= response->status_code && response->status_code < 300)
     {
-      const Param_Type parsed = serialize_.parse_urlencoded(response->body);
+      const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
       key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
       key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
     }
@@ -153,8 +153,6 @@ protected:
   boost::shared_ptr<Key_Type> key_;
   boost::shared_ptr<bstcon::client> client_;
   oauth::utility::signature<oauth::utility::hmac_sha1> signature_;
-  oauth::utility::serialize serialize_;
-  oauth::utility::nonce nonce_;
 };
 
 } // namespace detail
