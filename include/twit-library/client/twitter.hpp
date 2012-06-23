@@ -35,8 +35,8 @@ struct twitter_set{
   }
 };
 
-class twitter : public oauth::common_v1<oauth::twitter_set>{
-  typedef oauth::common_v1<oauth::twitter_set> MyParent;
+class twitter : public oauth::client::common_v1<oauth::twitter_set>{
+  typedef oauth::client::common_v1<oauth::twitter_set> MyParent;
   typedef oauth::twitter_set URL_Set;
 public:
   twitter(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client): MyParent(key,client){}
@@ -83,15 +83,7 @@ public:
 
     client_->operator() (URL_Set::get_host(),buf,
       boost::bind(&twitter::set_access_token,this,_1,_2));
-
-    //const int status_code = response->status_code;
-    //if(200 <= status_code && status_code < 300)
-    //{
-    //  const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
-    //  key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
-    //  key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
-    //}
-
+    
     return;
   }
 #endif

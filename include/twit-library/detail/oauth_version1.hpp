@@ -58,14 +58,6 @@ public:
       client_->operator() (uri_parsed.get_host(),buf,ec,
         boost::bind(&oauth_version1::set_access_token,this,_1,_2));
 
-    //const int status_code = response->status_code;
-    //if(200 <= status_code && status_code < 300)
-    //{
-    //  const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
-    //  key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
-    //  key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
-    //}
-
     return;
   }
 

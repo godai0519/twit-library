@@ -21,10 +21,6 @@
 //  return 0;
 //}
 
-/*#include <boost/thread.hpp>
-#include <boost/property_tree/ptree.hpp>
-*/
-
 #include <babel.h>
 
 int main()
@@ -56,10 +52,6 @@ int main()
 //  */
 
   {
-
-    boost::asio::io_service io_service;
-    boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL用
-
     boost::shared_ptr<oauth::keys::key_version1> key(
       new oauth::keys::key_version1("consumer_key","consumer_secret"));
     oauth::twitter client(
@@ -68,113 +60,52 @@ int main()
       );
 
     // XAuth
+    io_service.reset();
     client.get_xauth_token("user_id","password");
     io_service.run();
-    io_service.reset();
+    
+    std::string status;
+    std::getline(std::cin, status);
 
+    io_service.reset();
     std::map<std::string,std::string> params = boost::assign::map_list_of
-      ("status",babel::sjis_to_utf8("テスト"));
+      ("status",babel::sjis_to_utf8(status));
     const boost::shared_ptr<bstcon::response> response
       = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params);
     io_service.run();
-
   }
-//  //{
-//  //  boost::shared_ptr<oauth::keys::key_version1> key(
-//  //    new oauth::keys::key_version1("consumer_key","consumer_secret"));
-//  //  oauth::twitter client(
-//  //    key,
-//  //    boost::shared_ptr<bstcon::client>(new bstcon::client(io_service,ctx))
-//  //    );
-//
-//  //  // XAuth
-//  //  client.get_xauth_token("user_id","user_password");
-//
-//  //  std::map<std::string,std::string> params = boost::assign::map_list_of
-//  //    ("status","hoge");
-//  //  const boost::shared_ptr<bstcon::response> response
-//  //    = client.request_urlencoded("POST","http://api.twitter.com/1/statuses/update.xml",params);
-//  //}
-//
-//  //twitter
-//  /*
-//  {
-//    boost::shared_ptr<oauth::keys::key_version1> key(
-//      new oauth::keys::key_version1("consumer_key","consumer_secret"));
-//    oauth::client<oauth::version::v1> client(
-//      key,
-//      boost::shared_ptr<bstcon::client>(new bstcon::client(io_service))
-//      );
-//  
-//
-//    client.get_request_token("POST","http://api.twitter.com/oauth/request_token");
-//    const std::string auth_uri = "http://api.twitter.com/oauth/authorize?oauth_token=" + key->get_access_token();
-//
-//    std::string pin;
-//    std::cin >> pin;
-//
-//    client.get_access_token("POST","http://api.twitter.com/oauth/access_token",pin);
-//
-//    std::map<std::string,std::string> params = boost::assign::map_list_of
-//      ("status","hoge");
-//    const boost::shared_ptr<bstcon::response> response
-//      = client.request_urlencoded("POST","http://api.twitter.com/1/statuses/update.xml",params);
-//  }*/
-//
-//  //boost::system::error_code ec;
-//  //const std::string host("www.hatena.ne.jp");
-//  //boost::asio::streambuf buf;
-//  //std::ostream os(&buf);
-//  //os << "GET / HTTP/1.1\r\nHost: " << host << "\r\nConnection: close\r\n\r\n"; //ただのリクエスト
-//
-//  ////
-//  //// 同期・HTTP通信
-//  ////
-//  //{
-//  //  bstcon::client client(io_service/*,oauth::protocol::connection_type::sync*/);
-//  //  client(host,buf,ec);
-//  //  
-//  //  //終了
-//  //}
-//
-//  ////
-//  //// 同期・SSL通信
-//  ////
-//  //{
-//  //  bstcon::client client(io_service,ctx/*,oauth::protocol::connection_type::sync*/);
-//  //  client(host,buf,ec);
-//
-//  //  //終了
-//  //}
-//  
-//  ////
-//  //// 非同期・HTTP通信
-//  ////
-//  //{
-//  //  bstcon::client client(io_service,oauth::protocol::connection_type::async);
-//  //  client(host,buf,ec);
-//
-//  //  //何か
-//
-//  //  io_service.run(); //通信を走らせる
-//
-//  //  //終了
-//  //  return 0;
-//  //}
-//
-//  ////
-//  //// 非同期・SSL通信
-//  ////
-//  //{
-//  //  bstcon::client client(io_service,ctx,oauth::protocol::connection_type::async);
-//  //  client(host,buf,ec);
-//
-//  //  //何か
-//
-//  //  io_service.run(); //通信を走らせる
-//
-//  //  //終了
-//  //}
   
+  ////twitter
+  //{
+  //  boost::shared_ptr<oauth::keys::key_version1> key(
+  //    new oauth::keys::key_version1("consumer_key","consumer_secret"));
+  //  oauth::twitter client(
+  //    key,
+  //    boost::shared_ptr<bstcon::client>(new bstcon::client(io_service,ctx,bstcon::connection_type::async))
+  //    );  
+
+  //  io_service.reset();
+  //  client.get_request_token();
+  //  io_service.run();
+
+  //  const std::string auth_uri = "http://api.twitter.com/oauth/authorize?oauth_token=" + key->get_access_token();    
+  //  std::string pin;
+  //  std::cin >> pin;
+
+  //  io_service.reset();
+  //  client.get_access_token(pin);
+  //  io_service.run();
+  //  
+  //  std::string status;
+  //  std::cin >> status;
+
+  //  io_service.reset();
+  //  std::map<std::string,std::string> params = boost::assign::map_list_of
+  //    ("status",babel::sjis_to_utf8(status));
+  //  const boost::shared_ptr<bstcon::response> response
+  //    = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params);
+  //  io_service.run();
+  //}
+
   return 0;
 }

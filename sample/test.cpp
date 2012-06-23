@@ -13,5 +13,4 @@
 #include <twit-library/keys.hpp>
 #include <twit-library/keys/key_version1.hpp>
 #include <twit-library/keys/key_version2.hpp>
-#include <twit-library/utility.hpp>
 #include <twit-library/utility/authentication.hpp>

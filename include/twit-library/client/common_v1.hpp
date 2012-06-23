@@ -11,14 +11,10 @@
 #include "../detail/oauth_version1.hpp"
 
 namespace oauth{
-//namespace client{
-  
+namespace client{
+
 template<class URL_Set>
 class common_v1: public oauth::detail::oauth_version1{
-public:
-//  typedef oauth::version::v1           OAuth_Version;
-  typedef oauth::keys::key_version1      Key_Type;
-  
 public:
   common_v1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
     : oauth_version1(key,client)
@@ -42,18 +38,9 @@ public:
       pin_code
       );
   }
-
-  virtual const boost::shared_ptr<bstcon::response> request_urlencoded(const std::string& method,const std::string& uri,const std::map<std::string,std::string>& params)
-  {
-    return oauth_version1::request_urlencoded(
-      method,
-      uri,
-      params
-      );
-  }  
 };
 
-//} // namespace version
+} // namespace client
 } // namespace oauth
 
 #endif
