@@ -35,9 +35,8 @@ struct yahoo_set{
   }
 };
 
-typedef oauth::common_v1<oauth::yahoo_set> yahoo;
+typedef oauth::client::common_v1<oauth::yahoo_set> yahoo;
 
-//} // namespace version
 } // namespace oauth
 
 #endif

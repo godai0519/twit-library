@@ -87,7 +87,6 @@
     <ClInclude Include="keys.hpp" />
     <ClInclude Include="keys\key_version1.hpp" />
     <ClInclude Include="keys\key_version2.hpp" />
-    <ClInclude Include="utility.hpp" />
     <ClInclude Include="utility\authentication.hpp" />
   </ItemGroup>
   <ItemGroup>

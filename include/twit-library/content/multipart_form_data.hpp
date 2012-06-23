@@ -19,9 +19,7 @@ namespace content{
 class multipart_form_data : public multipart_content_base{
 public:
   typedef std::vector<multipart_content_base*> Param_Type;
-  //typedef boost::variate_generator<boost::mt19937&,boost::uniform_int<unsigned long>> Variate_Type;
-  //typedef boost::uniform_int<unsigned int> Uniform_Type;
-  
+
   multipart_form_data(const Param_Type& body_params,const std::string& disposition="")
     : disposition_(disposition),body_params_(body_params),boundary_("-"+oauth::utility::nonce<std::string>())
   {}
