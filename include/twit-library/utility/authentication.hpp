@@ -302,19 +302,41 @@ inline const std::string get_urlencoded(const std::map<std::string,std::string>&
 
 inline const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
 {
-  namespace qi = boost::spirit::qi;
+  //namespace qi = boost::spirit::qi;
 
-  const auto value_rule = ((+(qi::char_ - "&") >> -qi::lit("&")));
-  const auto pair_rule =
-    +(qi::char_ - "=") >> "=" >> value_rule;
-  const auto rule = 
-    *pair_rule;
-  
-  auto it = encoded.cbegin();
-  std::map<std::string,std::string> parsed;
-  qi::parse(it,encoded.cend(),rule,parsed);
+  //const qi::rule<std::string::const_iterator,std::pair<std::string,std::string>> pair_rule =
+  //  +(qi::char_ - "=") >> "=" >> ((+(qi::char_ - "&") >> -qi::lit("&")));
+  //const qi::rule<std::string::const_iterator,std::map<std::string,std::string>> rule = 
+  //  *pair_rule;
+  //
+  //std::string::const_iterator it = encoded.cbegin();
+  //std::map<std::string,std::string> parsed;
+  //qi::parse(it,encoded.cend(),rule,
+  //  *(+(qi::char_ - "=") >> "=" >> ((+(qi::char_ - "&") >> -qi::lit("&"))))
+  //  );
 
-  return parsed;
+  std::map<std::string,std::string> data;
+
+  std::string::const_iterator it = encoded.cbegin();
+  while(true)
+  {
+    std::string::const_iterator temp = it;
+
+    while(*temp != '=' && temp != encoded.cend()) ++temp;
+    if(temp == encoded.cend()) throw "parse_urlencoded Error";
+    std::string key(it,temp);
+
+    it = (++temp);
+    while(*temp != '&' && temp != encoded.cend()) ++temp;
+    std::string value(it,temp);
+
+    data[key] = value;
+    if(temp == encoded.cend()) break;
+
+    it = (++temp);
+  }
+
+  return data;
 }
 
 class uri_parser{
@@ -332,12 +354,9 @@ public:
   {
     namespace qi = boost::spirit::qi;
       
-    const auto rule = 
-      +(qi::char_ - ":") >> qi::lit(":") >> *qi::lit("/") >> +(qi::char_ - "/") >> +(qi::char_ - "?");
-
     uri_ = uri;
     std::string::const_iterator it = uri_.cbegin();
-    bool success = qi::parse(it,uri_.cend(),rule,scheme_,host_,path_);
+    bool success = qi::parse(it,uri_.cend(),+(qi::char_ - ":") >> qi::lit(":") >> *qi::lit("/") >> +(qi::char_ - "/") >> +(qi::char_ - "?"),scheme_,host_,path_);
 
     return success && it == uri_.cend();
   }
