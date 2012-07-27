@@ -97,9 +97,6 @@
   <ItemGroup>
     <ClCompile Include="C:\babel\babel.cpp" />
     <ClCompile Include="sample.cpp" />
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
