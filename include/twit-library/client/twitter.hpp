@@ -42,6 +42,9 @@ public:
   twitter(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client): MyParent(key,client){}
   virtual ~twitter(){}
 
+  std::string get_user_id() const { return user_id_; }
+  std::string get_screen_name() const { return screen_name_; }
+
 #ifdef USE_SSL_BOOSTCONNECT
   void get_xauth_token(const std::string& id, const std::string& password)
   {
@@ -87,6 +90,25 @@ public:
     return;
   }
 #endif
+  
+protected:
+  void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec)
+  {
+    if(ec) return;
+    if(200 <= response->status_code && response->status_code < 300)
+    {
+      const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
+      key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
+      key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
+      user_id_ = oauth::utility::url_decode(parsed.at("user_id"));
+      screen_name_ = oauth::utility::url_decode(parsed.at("screen_name"));
+    }
+    return;
+  }
+
+  std::string user_id_;
+  std::string screen_name_;
+
 
 };
 
