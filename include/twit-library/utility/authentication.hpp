@@ -302,41 +302,46 @@ inline const std::string get_urlencoded(const std::map<std::string,std::string>&
 
 inline const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
 {
-  //namespace qi = boost::spirit::qi;
+  namespace qi = boost::spirit::qi;
 
-  //const qi::rule<std::string::const_iterator,std::pair<std::string,std::string>> pair_rule =
-  //  +(qi::char_ - "=") >> "=" >> ((+(qi::char_ - "&") >> -qi::lit("&")));
-  //const qi::rule<std::string::const_iterator,std::map<std::string,std::string>> rule = 
-  //  *pair_rule;
-  //
-  //std::string::const_iterator it = encoded.cbegin();
-  //std::map<std::string,std::string> parsed;
-  //qi::parse(it,encoded.cend(),rule,
-  //  *(+(qi::char_ - "=") >> "=" >> ((+(qi::char_ - "&") >> -qi::lit("&"))))
-  //  );
+  qi::rule<std::string::const_iterator,std::string()> key   = +(qi::char_ - qi::lit("="));
+  qi::rule<std::string::const_iterator,std::string()> value = +(qi::char_ - qi::lit("&"));
+  qi::rule<std::string::const_iterator,std::pair<std::string,std::string>()> pair = key >> qi::lit("=") >> value;
+  qi::rule<std::string::const_iterator,std::map<std::string,std::string>()> rule = pair % qi::lit("&");
+  
 
-  std::map<std::string,std::string> data;
-
+  
   std::string::const_iterator it = encoded.cbegin();
-  while(true)
-  {
-    std::string::const_iterator temp = it;
+  std::map<std::string,std::string> parsed;
+  std::pair<std::string,std::string> p;
+  qi::parse(it,encoded.cend(),rule/*,
+    *(+(qi::char_ - "=") >> "=" >> ((+(qi::char_ - "&") >> -qi::lit("&"))))*/,parsed
+    );
 
-    while(*temp != '=' && temp != encoded.cend()) ++temp;
-    if(temp == encoded.cend()) throw "parse_urlencoded Error";
-    std::string key(it,temp);
+  return parsed;
 
-    it = (++temp);
-    while(*temp != '&' && temp != encoded.cend()) ++temp;
-    std::string value(it,temp);
+  //std::map<std::string,std::string> data;
 
-    data[key] = value;
-    if(temp == encoded.cend()) break;
+  //std::string::const_iterator it = encoded.cbegin();
+  //while(true)
+  //{
+  //  std::string::const_iterator temp = it;
 
-    it = (++temp);
-  }
+  //  while(*temp != '=' && temp != encoded.cend()) ++temp;
+  //  if(temp == encoded.cend()) throw "parse_urlencoded Error";
+  //  std::string key(it,temp);
 
-  return data;
+  //  it = (++temp);
+  //  while(*temp != '&' && temp != encoded.cend()) ++temp;
+  //  std::string value(it,temp);
+
+  //  data[key] = value;
+  //  if(temp == encoded.cend()) break;
+
+  //  it = (++temp);
+  //}
+
+  //return data;
 }
 
 class uri_parser{
