@@ -1,5 +1,7 @@
 #define USE_SSL_BOOSTCONNECT
 
+#include <boost/thread.hpp>
+#include <boost/bind.hpp>
 #include <twit-library/client.hpp>
 #include <twit-library/client/twitter.hpp>
 #include <twit-library/client/yahoo.hpp>
@@ -21,12 +23,22 @@
 //  return 0;
 //}
 
-#include <babel.h>
+bool loop = true;
+void print(std::string* body)
+{
+    while(loop)
+    {
+      if(!body->empty())
+      {
+        std::cout << *body << "\n" << std::flush;
+        body->erase();
+      }
+    }
+    return;
+}
 
 int main()
 {
-  babel::init_babel();
-
   //ÇΩÇæÇÃèÄîıÇ≈Ç∑
   boost::asio::io_service io_service;
   boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSLóp
@@ -54,9 +66,11 @@ int main()
   {
     boost::shared_ptr<oauth::keys::key_version1> key(
       new oauth::keys::key_version1("consumer_key","consumer_secret"));
+
+    boost::shared_ptr<bstcon::client> connect_client(new bstcon::client(io_service,ctx,bstcon::connection_type::async));
     oauth::twitter client(
       key,
-      boost::shared_ptr<bstcon::client>(new bstcon::client(io_service,ctx,bstcon::connection_type::async))
+      connect_client
       );
 
     // XAuth
@@ -64,15 +78,15 @@ int main()
     client.get_xauth_token("user_id","password");
     io_service.run();
     
-    std::string status;
-    std::getline(std::cin, status);
-
     io_service.reset();
-    std::map<std::string,std::string> params = boost::assign::map_list_of
-      ("status",babel::sjis_to_utf8(status));
     const boost::shared_ptr<bstcon::response> response
-      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params);
-    io_service.run();
+      = client.request_urlencoded("GET","https://userstream.twitter.com/2/user.json",std::map<std::string,std::string>());
+    boost::thread th(boost::bind(&boost::asio::io_service::run,&io_service));
+    boost::thread loop_th(boost::bind(&print,&response->body));
+
+    th.join();
+    loop = false;
+    loop_th.join();
   }
   
   ////twitter
