@@ -23,20 +23,6 @@
 //  return 0;
 //}
 
-bool loop = true;
-void print(std::string* body)
-{
-    while(loop)
-    {
-      if(!body->empty())
-      {
-        std::cout << *body << "\n" << std::flush;
-        body->erase();
-      }
-    }
-    return;
-}
-
 int main()
 {
   //‚½‚¾‚Ì€”õ‚Å‚·
@@ -79,14 +65,48 @@ int main()
     io_service.run();
     
     io_service.reset();
-    const boost::shared_ptr<bstcon::response> response
-      = client.request_urlencoded("GET","https://userstream.twitter.com/2/user.json",std::map<std::string,std::string>());
-    boost::thread th(boost::bind(&boost::asio::io_service::run,&io_service));
-    boost::thread loop_th(boost::bind(&print,&response->body));
 
-    th.join();
-    loop = false;
-    loop_th.join();
+    //UserStream
+    const boost::shared_ptr<bstcon::response> response
+      = client.request_urlencoded("GET","https://userstream.twitter.com/2/user.json",std::map<std::string,std::string>(),
+          [](const boost::shared_ptr<bstcon::response> res,const boost::system::error_code&)->void{
+            std::cout << res->body << "\n" << std::flush;
+            res->body.erase();
+          });
+    
+    //‘—‚Á‚Ä‚İ‚é€”õ
+    std::map<std::string,std::string> params2 = boost::assign::map_list_of
+      ("status","aaaaaaaaaaaaaaaaa");
+    const boost::shared_ptr<bstcon::response> response2
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params2);
+    
+    std::map<std::string,std::string> params3 = boost::assign::map_list_of
+      ("status","bbbbbbbbbbbbbbbbb");
+    const boost::shared_ptr<bstcon::response> response3
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params3);
+
+    std::map<std::string,std::string> params4 = boost::assign::map_list_of
+      ("status","ccccccccccccccccc");
+    const boost::shared_ptr<bstcon::response> response4
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params4);
+
+    std::map<std::string,std::string> params5 = boost::assign::map_list_of
+      ("status","ddddddddddddddddd");
+    const boost::shared_ptr<bstcon::response> response5
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params5);
+
+    std::map<std::string,std::string> params6 = boost::assign::map_list_of
+      ("status","eeeeeeeeeeeeeeeee");
+    const boost::shared_ptr<bstcon::response> response6
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params6);
+
+    std::map<std::string,std::string> params7 = boost::assign::map_list_of
+      ("status","fffffffffffffffff");
+    const boost::shared_ptr<bstcon::response> response7
+      = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params7);
+
+    //Às
+    io_service.run();
   }
   
   ////twitter

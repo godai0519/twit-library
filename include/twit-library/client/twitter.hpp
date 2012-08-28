@@ -46,7 +46,7 @@ public:
   std::string get_screen_name() const { return screen_name_; }
 
 #ifdef USE_SSL_BOOSTCONNECT
-  void get_xauth_token(const std::string& id, const std::string& password)
+  void get_xauth_token(const std::string& id, const std::string& password, GetTokenHandler handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{})
   {
     Param_Type params = boost::assign::map_list_of
       ("oauth_consumer_key",key_->get_consumer_key())
@@ -85,14 +85,14 @@ public:
     }
 
     client_->operator() (URL_Set::get_host(),buf,
-      boost::bind(&twitter::set_access_token,this,_1,_2));
+      boost::bind(&twitter::set_access_token,this,_1,_2,handler));
     
     return;
   }
 #endif
   
 protected:
-  void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec)
+  void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec,GetTokenHandler handler)
   {
     if(ec) return;
     if(200 <= response->status_code && response->status_code < 300)
@@ -103,13 +103,13 @@ protected:
       user_id_ = oauth::utility::url_decode(parsed.at("user_id"));
       screen_name_ = oauth::utility::url_decode(parsed.at("screen_name"));
     }
+    handler(response,ec);
+
     return;
   }
 
   std::string user_id_;
   std::string screen_name_;
-
-
 };
 
 } // namespace oauth
