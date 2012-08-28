@@ -22,6 +22,9 @@ class oauth_version1 : boost::noncopyable{
 public:
   typedef std::map<std::string,std::string> Param_Type;
   typedef oauth::keys::key_version1 Key_Type;
+  typedef boost::function<void (const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)> EveryChunkHandler;
+  typedef boost::function<void (const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)> GetTokenHandler;
+
   oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
   {
     key_ = key;
@@ -93,7 +96,7 @@ public:
     return;
   }
 
-  virtual const boost::shared_ptr<bstcon::response> request_urlencoded(const std::string& method,const std::string& uri,const Param_Type& params)
+  virtual const boost::shared_ptr<bstcon::response> request_urlencoded(const std::string& method,const std::string& uri,const Param_Type& params,EveryChunkHandler chunk_handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{})
   {
     oauth::utility::uri_parser uri_parsed(uri);
 
@@ -124,7 +127,7 @@ public:
     }
 
     boost::system::error_code ec;
-    const boost::shared_ptr<bstcon::response> response =  client_->operator() (uri_parsed.get_host(),buf,ec);
+    const boost::shared_ptr<bstcon::response> response =  client_->operator() (uri_parsed.get_host(),buf,ec,[](boost::shared_ptr<bstcon::response>,const boost::system::error_code&){},chunk_handler);
 
     return response;
   }
