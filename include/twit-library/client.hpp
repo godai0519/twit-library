@@ -12,8 +12,8 @@
 #include "detail/oauth_version2.hpp"
 
 namespace oauth{
-  typedef oauth::detail::oauth_version1 client_v1;
-  typedef oauth::detail::oauth_version2 client_v2;
+    typedef oauth::detail::oauth_version1 client_v1;
+    typedef oauth::detail::oauth_version2 client_v2;
 }
 
 #endif

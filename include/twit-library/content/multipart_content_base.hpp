@@ -16,11 +16,11 @@ namespace content{
 
 class multipart_content_base : public content_base{
 public:
-  multipart_content_base(){}
-  virtual ~multipart_content_base(){}
+    multipart_content_base(){}
+    virtual ~multipart_content_base(){}
 
-  const std::map<std::string,std::string> get_addition_param() const { return std::map<std::string,std::string>(); }
-  virtual const std::string get_part_body() const { return ""; }
+    const std::map<std::string,std::string> get_addition_param() const { return std::map<std::string,std::string>(); }
+    virtual const std::string get_part_body() const { return ""; }
 };
 
 } // namespace content
