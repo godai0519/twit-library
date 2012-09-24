@@ -1,8 +1,8 @@
-//
+﻿//
 // client.hpp
 // ~~~~~~~~~~
 //
-// OAuth�F�؂̎�v�t�@�C���̊񂹏W��
+// OAuth認証の主要ファイルの寄せ集め
 //
 
 #ifndef TWIT_LIB_CLIENT

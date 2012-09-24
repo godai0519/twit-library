@@ -1,8 +1,8 @@
-//
+ï»¿//
 // twitter.hpp
 // ~~~~~~~~~~
 //
-// Twitter URL List‚Æ‚»‚ÌÀ—p‰»
+// Twitter URL Listã¨ãã®å®Ÿç”¨åŒ–
 //
 
 #ifndef TWIT_LIB_TWITTER

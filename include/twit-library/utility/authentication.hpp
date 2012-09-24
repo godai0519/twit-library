@@ -1,12 +1,12 @@
-//
+ï»¿//
 // authentication.hpp
 // ~~~~~~~~~~
 //
-// ”FØŒn‹@\‚Ìutility‘W
+// èªè¨¼ç³»æ©Ÿæ§‹ã®utilityç·é›†
 //
 
 //
-// ‚ñH‘S•”inline•t‚¢‚Ä‚Ä‚¨‚©‚µ‚¢‚Á‚ÄH‚»‚ñ‚È‚Ì‹C‚É‚µ‚½‚ç•‰‚¯‚¾‚æI
+// ã‚“ï¼Ÿå…¨éƒ¨inlineä»˜ã„ã¦ã¦ãŠã‹ã—ã„ã£ã¦ï¼Ÿãã‚“ãªã®æ°—ã«ã—ãŸã‚‰è² ã‘ã ã‚ˆï¼
 //
 
 #ifndef TWIT_LIB_UTILITY_AUTHENTICATION
@@ -61,7 +61,7 @@ inline const std::string url_encode(const std::string& base_string)
     return encoded;
 }
 
-// +¨' '‚É‚Í‚µ‚È‚¢
+// +â†’' 'ã«ã¯ã—ãªã„
 inline const std::string url_decode(const std::string& base_string)
 {
     std::string decoded="";
@@ -85,14 +85,14 @@ class sha1{
 public:
     const std::string operator() (std::string data,unsigned long long length)
     {
-        // 0x80‚ğ‹l‚ß‚é
+        // 0x80ã‚’è©°ã‚ã‚‹
         data.push_back((char)0x80);
 
-        // 64*n + (64-8)bit‚É’B‚·‚é‚æ‚¤‚É0x00‚ğ‹l‚ß‚é
+        // 64*n + (64-8)bitã«é”ã™ã‚‹ã‚ˆã†ã«0x00ã‚’è©°ã‚ã‚‹
         const int add_length = 56 - data.length() % 64;
         data.append((add_length < 0) ? add_length + 64 : add_length, (char)0x00);
     
-        //’·‚³‚ğ8ƒoƒCƒg‚Å‹l‚ß‚é
+        //é•·ã•ã‚’8ãƒã‚¤ãƒˆã§è©°ã‚ã‚‹
         length *= 8;
         for(int i=56; i>=0; i-=8) data.push_back((char)(length >> i) & 0xFF);
     
@@ -193,7 +193,7 @@ class signature{
     Scheme scheme_;
 
 public:    
-    // std::string::push_back ‚© append ‚©‚É“ˆê‚µ‚½‚¢‚È‚Ÿ
+    // std::string::push_back ã‹ append ã‹ã«çµ±ä¸€ã—ãŸã„ãªã
     const std::string base64_encode(const std::string& data)
     {
         static const char table[] =
@@ -229,7 +229,7 @@ public:
         return result;
     }
 
-    //Karmag‚¦‚éH‚Ì‚©‚È
+    //Karmaä½¿ãˆã‚‹ï¼Ÿã®ã‹ãª
     const std::string operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)
     {
         typedef std::pair<const std::string,std::string> Value_Pair;
@@ -275,7 +275,7 @@ const Output nonce()
     return result;
 }
 
-//get_authorization_field‚Æget_urlencoded‚ğ‚Ü‚Æ‚ß‚ç‚ê‚»‚¤D
+//get_authorization_fieldã¨get_urlencodedã‚’ã¾ã¨ã‚ã‚‰ã‚Œãã†ï¼
 inline const std::string get_authorization_field(const std::map<std::string,std::string>& values)
 {
     typedef std::pair<const std::string,std::string> Value_Pair;

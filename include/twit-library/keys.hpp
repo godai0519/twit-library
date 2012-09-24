@@ -1,8 +1,8 @@
-//
+ï»¿//
 // keys.hpp
 // ~~~~~~~~~~
 //
-// Ú‘±‚·‚é‚½‚ß‚ÌBoost.Asio‚ðŽg—p‚µ‚½ƒNƒ‰ƒXŒQ
+// æŽ¥ç¶šã™ã‚‹ãŸã‚ã®Boost.Asioã‚’ä½¿ç”¨ã—ãŸã‚¯ãƒ©ã‚¹ç¾¤
 //
 
 #ifndef TWIT_LIB_KEYS

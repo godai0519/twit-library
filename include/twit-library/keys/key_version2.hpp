@@ -1,8 +1,8 @@
-//
+ï»¿//
 // key_version2.hpp
 // ~~~~~~~~~~
 //
-// OAuth Key‚ÌW‡‘ÌCVersion2—pŠg’£
+// OAuth Keyã®é›†åˆä½“ï¼ŒVersion2ç”¨æ‹¡å¼µ
 //
 
 #ifndef TWIT_LIB_KEYS_VERSION_2
