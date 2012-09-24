@@ -1,8 +1,8 @@
-//
+ï»¿//
 // v1.hpp
 // ~~~~~~~~~~
 //
-// OAuth1.0—pC’è‹`ƒŠƒXƒg
+// OAuth1.0ç”¨ï¼Œå®šç¾©ãƒªã‚¹ãƒˆ
 //
 
 #ifndef TWIT_LIB_COMMON_V1

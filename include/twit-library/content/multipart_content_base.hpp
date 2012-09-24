@@ -1,8 +1,8 @@
-//
+ï»¿//
 // multipart_content_base.hpp
 // ~~~~~~~~~~
 //
-// Content-Type“™X¶¬Šg’£‘O(multipart/form-dataŒn)
+// Content-Typeç­‰ã€…ç”Ÿæˆæ‹¡å¼µå‰(multipart/form-dataç³»)
 //
 
 #ifndef TWIT_LIB_CONTENT_MULTI_BASE

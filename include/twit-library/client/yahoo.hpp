@@ -1,8 +1,8 @@
-//
+ï»¿//
 // yahoo.hpp
 // ~~~~~~~~~~
 //
-// Yahoo URL List‚Æ‚»‚ÌÀ—p‰»
+// Yahoo URL Listã¨ãã®å®Ÿç”¨åŒ–
 //
 
 #ifndef TWIT_LIB_YAHOO

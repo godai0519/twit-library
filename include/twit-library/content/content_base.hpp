@@ -1,8 +1,8 @@
-//
+ï»¿//
 // content_base.hpp
 // ~~~~~~~~~~
 //
-// Content-Type“™X¶¬Šg’£‘O
+// Content-Typeç­‰ã€…ç”Ÿæˆæ‹¡å¼µå‰
 //
 
 #ifndef TWIT_LIB_CONTENT_BASE

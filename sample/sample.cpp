@@ -1,4 +1,4 @@
-#define USE_SSL_BOOSTCONNECT
+ï»¿#define USE_SSL_BOOSTCONNECT
 
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
@@ -12,7 +12,7 @@
 //int main()
 //{
 //    boost::asio::io_service io_service;
-//    boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL—p
+//    boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSLç”¨
 //    
 //    boost::shared_ptr<oauth::keys::key_version2> key(
 //        new oauth::keys::key_version2("client_id","cient_secret"));
@@ -25,9 +25,9 @@
 
 int main()
 {
-    //‚½‚¾‚Ì€”õ‚Å‚·
+    //ãŸã ã®æº–å‚™ã§ã™
     boost::asio::io_service io_service;
-    boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL—p
+    boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSLç”¨
     
 //    //yahoo
 //    /*{
@@ -74,7 +74,7 @@ int main()
                         res->body.erase();
                     });
         
-        //‘—‚Á‚Ä‚İ‚é€”õ
+        //é€ã£ã¦ã¿ã‚‹æº–å‚™
         std::map<std::string,std::string> params2 = boost::assign::map_list_of
             ("status","aaaaaaaaaaaaaaaaa");
         const boost::shared_ptr<bstcon::response> response2
@@ -105,7 +105,7 @@ int main()
         const boost::shared_ptr<bstcon::response> response7
             = client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params7);
 
-        //Às
+        //å®Ÿè¡Œ
         io_service.run();
     }
     

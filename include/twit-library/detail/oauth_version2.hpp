@@ -1,8 +1,8 @@
-//
+ï»¿//
 // oauth_version2.hpp
 // ~~~~~~~~~~
 //
-// OAuth Version2—pŠg’£
+// OAuth Version2ç”¨æ‹¡å¼µ
 //
 
 #ifndef TWIT_LIB_DETAIL_OAUTH_VER_2
