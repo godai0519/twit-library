@@ -83,9 +83,16 @@ public:
             os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(params) << "\r\n\r\n";
             os << body;
         }
+        
+        (*client_)(
+            URL_Set::get_host(),
+            [buf,handler,this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
+            {
+                connection->send(buf,boost::bind(&twitter::set_access_token,this,_1,_2,handler));
+            });
 
-        client_->operator() (URL_Set::get_host(),buf,
-            boost::bind(&twitter::set_access_token,this,_1,_2,handler));
+        //client_->operator() (URL_Set::get_host(),buf,
+        //    boost::bind(&twitter::set_access_token,this,_1,_2,handler));
         
         return;
     }
