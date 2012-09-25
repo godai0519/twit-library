@@ -33,8 +33,8 @@ public:
             ("response_type",response_type);
 
         if(!redirect_uri.empty()) param["redirect_uri"] = redirect_uri; //MAY
-        if(!scope.empty())                param["scope"] = scope;                             //Option
-        if(!state.empty())                param["state"] = state;                             //Option
+        if(!scope.empty())                param["scope"] = scope;       //Option
+        if(!state.empty())                param["state"] = state;       //Option
         
         return uri+"?"+oauth::utility::get_urlencoded(param);
     }
@@ -62,11 +62,13 @@ public:
             os << body;
         }
     
-        boost::system::error_code ec;
-        const boost::shared_ptr<bstcon::response> response = 
-            client_->operator() (uri_parsed.get_host(),buf,ec,
-                boost::bind(&oauth_version2::set_access_token,this,_1,_2));
-
+        (*client_)(
+            uri_parsed.get_host(),
+            [buf,this](bstcon::connection_type::connection_base::connection_ptr connection, boost::system::error_code ec)
+            {
+                connection->send(buf, boost::bind(&oauth_version2::set_access_token,this,_1,_2));
+            });
+        
     return;
     }
 
