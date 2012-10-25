@@ -27,6 +27,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -87,7 +88,15 @@
     <ClInclude Include="keys.hpp" />
     <ClInclude Include="keys\key_version1.hpp" />
     <ClInclude Include="keys\key_version2.hpp" />
+    <ClInclude Include="utility.hpp" />
     <ClInclude Include="utility\authentication.hpp" />
+    <ClInclude Include="utility\base64.hpp" />
+    <ClInclude Include="utility\hmac.hpp" />
+    <ClInclude Include="utility\radix.hpp" />
+    <ClInclude Include="utility\sha1.hpp" />
+    <ClInclude Include="utility\percent_encoding.hpp" />
+    <ClInclude Include="utility\url.hpp" />
+    <ClInclude Include="utility\url_encoded.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="client.hpp" />
