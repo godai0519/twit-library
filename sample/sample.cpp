@@ -25,6 +25,12 @@
 
 int main()
 {
+    oauth::utility::base64 base64;
+    std::string str("Raw String");
+    std::cout << (str = base64.encode(str)) << std::endl;
+    std::cout << (str = base64.decode(str)) << std::endl;
+
+
     //ただの準備です
     boost::asio::io_service io_service;
     boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL用
@@ -60,9 +66,9 @@ int main()
             );
 
         // XAuth
-        io_service.reset();
+        /*io_service.reset();
         client.get_xauth_token("user_id","password");
-        io_service.run();
+        io_service.run();*/
         
         io_service.reset();
 
@@ -72,42 +78,42 @@ int main()
            "       Access token: " << key->get_access_token() << std::endl <<
            "Access token secret: " << key->get_access_secret() << std::endl;
 
-        //userstream
-        client.request_urlencoded(
-            "GET",
-            "https://userstream.twitter.com/2/user.json",
-            std::map<std::string,std::string>(),
-            [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{},
-            [](const boost::shared_ptr<bstcon::response> res,const boost::system::error_code&)->void{
-                std::cout << res->body << std::flush;
-                res->body.erase();
-            });
+        ////userstream
+        //client.request_urlencoded(
+        //    "GET",
+        //    "https://userstream.twitter.com/2/user.json",
+        //    std::map<std::string,std::string>(),
+        //    [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{},
+        //    [](const boost::shared_ptr<bstcon::response> res,const boost::system::error_code&)->void{
+        //        std::cout << res->body << std::flush;
+        //        res->body.erase();
+        //    });
         
         //
         ////送ってみる準備
-        //std::map<std::string,std::string> params2 = boost::assign::map_list_of
-        //    ("status","D godai_0519 aaaaaaaaaaaaaaaaa");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params2);
-        //
-        //std::map<std::string,std::string> params3 = boost::assign::map_list_of
-        //    ("status","D godai_0519 bbbbbbbbbbbbbbbbb");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params3);
+        std::map<std::string,std::string> params2 = boost::assign::map_list_of
+            ("status","D godai_0519 aaaaaaaaaaaaaaaaa");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params2);
+        
+        std::map<std::string,std::string> params3 = boost::assign::map_list_of
+            ("status","D godai_0519 bbbbbbbbbbbbbbbbb");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params3);
 
-        //std::map<std::string,std::string> params4 = boost::assign::map_list_of
-        //    ("status","D godai_0519 ccccccccccccccccc");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params4);
+        std::map<std::string,std::string> params4 = boost::assign::map_list_of
+            ("status","D godai_0519 ccccccccccccccccc");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params4);
 
-        //std::map<std::string,std::string> params5 = boost::assign::map_list_of
-        //    ("status","D godai_0519 ddddddddddddddddd");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params5);
+        std::map<std::string,std::string> params5 = boost::assign::map_list_of
+            ("status","D godai_0519 ddddddddddddddddd");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params5);
 
-        //std::map<std::string,std::string> params6 = boost::assign::map_list_of
-        //    ("status","D godai_0519 eeeeeeeeeeeeeeeee");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params6);
+        std::map<std::string,std::string> params6 = boost::assign::map_list_of
+            ("status","D godai_0519 eeeeeeeeeeeeeeeee");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params6);
 
-        //std::map<std::string,std::string> params7 = boost::assign::map_list_of
-        //    ("status","D godai_0519 fffffffffffffffff");
-        //client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params7);
+        std::map<std::string,std::string> params7 = boost::assign::map_list_of
+            ("status","D godai_0519 fffffffffffffffff");
+        client.request_urlencoded("POST","https://api.twitter.com/1/statuses/update.xml",params7);
 
         //実行
         io_service.run();

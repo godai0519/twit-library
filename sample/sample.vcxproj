@@ -27,6 +27,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -45,7 +46,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\babel;$(SolutionDir)include;E:\BoostConnect\include;D:\BoostConnect\include;C:\openssl\build\debug\include;C:\boost\include\boost-1_50;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)..\BoostConnect\include;C:\boost\include\boost-1_51;C:\openssl\build\debug\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\openssl\build\debug\lib;C:\boost\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Main|Win32'">
@@ -95,7 +96,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\babel\babel.cpp" />
     <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

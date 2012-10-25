@@ -52,7 +52,7 @@ public:
             ("oauth_consumer_key",key_->get_consumer_key())
             ("oauth_signature_method","HMAC-SHA1")
             ("oauth_timestamp",oauth::utility::get_timestamp())
-            ("oauth_nonce",oauth::utility::nonce<std::string>())
+            ("oauth_nonce",oauth::utility::nonce())
             ("oauth_callback","oob")
             ("oauth_version","1.0")
             ("x_auth_password",password)
@@ -105,10 +105,10 @@ protected:
         if(200 <= response->status_code && response->status_code < 300)
         {
             const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
-            key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
-            key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
-            user_id_ = oauth::utility::url_decode(parsed.at("user_id"));
-            screen_name_ = oauth::utility::url_decode(parsed.at("screen_name"));
+            key_->set_access_token (oauth::utility::percent_decode(parsed.at("oauth_token")));
+            key_->set_access_secret(oauth::utility::percent_decode(parsed.at("oauth_token_secret")));
+            user_id_ = oauth::utility::percent_decode(parsed.at("user_id"));
+            screen_name_ = oauth::utility::percent_decode(parsed.at("screen_name"));
         }
         handler(response,ec);
 

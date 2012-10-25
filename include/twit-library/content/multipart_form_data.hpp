@@ -11,7 +11,7 @@
 #include <map>
 #include <string>
 #include "multipart_content_base.hpp"
-#include "../utility/authentication.hpp"
+#include "../utility.hpp"
 
 namespace oauth{
 namespace content{
@@ -21,7 +21,7 @@ public:
     typedef std::vector<multipart_content_base*> Param_Type;
 
     multipart_form_data(const Param_Type& body_params,const std::string& disposition="")
-        : disposition_(disposition),body_params_(body_params),boundary_("-"+oauth::utility::nonce<std::string>())
+        : disposition_(disposition),body_params_(body_params),boundary_("-"+oauth::utility::nonce())
     {}
 
     template <class UniformRandomNumberGenerator>
