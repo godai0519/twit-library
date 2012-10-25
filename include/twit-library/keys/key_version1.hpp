@@ -10,7 +10,7 @@
 
 #include <string>
 #include <boost/noncopyable.hpp>
-#include "../utility/authentication.hpp"
+#include "../utility/percent_encoding.hpp"
 
 namespace oauth{
 namespace keys{
@@ -40,7 +40,7 @@ public:
     const std::string get_consumer_secret() const { return consumer_secret_; }
     const std::string get_access_token()        const { return access_token_; }
     const std::string get_access_secret()     const { return access_secret_; }
-    const std::string get_signature_key()     const { return oauth::utility::url_encode(consumer_secret_) + "&" + oauth::utility::url_encode(access_secret_);};
+    const std::string get_signature_key()     const { return oauth::utility::percent_encode(consumer_secret_) + "&" + oauth::utility::percent_encode(access_secret_);};
 };
 
 } // namespace keys

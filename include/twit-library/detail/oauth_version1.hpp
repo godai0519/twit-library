@@ -13,7 +13,7 @@
 #include <boost/noncopyable.hpp>
 #include <boostconnect/client.hpp>
 #include "../keys/key_version1.hpp"
-#include "../utility/authentication.hpp"
+#include "../utility.hpp"
 
 namespace oauth{
 namespace detail{
@@ -41,7 +41,7 @@ public:
             ("oauth_consumer_key",key_->get_consumer_key())
             ("oauth_signature_method","HMAC-SHA1")
             ("oauth_timestamp",oauth::utility::get_timestamp())
-            ("oauth_nonce",oauth::utility::nonce<std::string>())
+            ("oauth_nonce",oauth::utility::nonce())
             ("oauth_callback","oob")
             ("oauth_version","1.0");
         
@@ -82,7 +82,7 @@ public:
             ("oauth_signature_method","HMAC-SHA1")
             ("oauth_timestamp",oauth::utility::get_timestamp())
             ("oauth_verifier",pin_code)
-            ("oauth_nonce",oauth::utility::nonce<std::string>())
+            ("oauth_nonce",oauth::utility::nonce())
             ("oauth_version","1.0");
         
         boost::assign::insert(params)
@@ -126,7 +126,7 @@ public:
             ("oauth_token",key_->get_access_token())
             ("oauth_signature_method","HMAC-SHA1")
             ("oauth_timestamp",oauth::utility::get_timestamp())
-            ("oauth_nonce",oauth::utility::nonce<std::string>())
+            ("oauth_nonce",oauth::utility::nonce())
             ("oauth_version","1.0");
 
         Param_Type signature_param = params;
@@ -164,8 +164,8 @@ protected:
         if(200 <= response->status_code && response->status_code < 300)
         {
             const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
-            key_->set_access_token (oauth::utility::url_decode(parsed.at("oauth_token")));
-            key_->set_access_secret(oauth::utility::url_decode(parsed.at("oauth_token_secret")));
+            key_->set_access_token (oauth::utility::percent_decode(parsed.at("oauth_token")));
+            key_->set_access_secret(oauth::utility::percent_decode(parsed.at("oauth_token_secret")));
         }
         return;
     }

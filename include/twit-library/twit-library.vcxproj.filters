@@ -45,9 +45,6 @@
     <ClInclude Include="keys\key_version2.hpp">
       <Filter>ヘッダー ファイル\keys</Filter>
     </ClInclude>
-    <ClInclude Include="utility\authentication.hpp">
-      <Filter>ヘッダー ファイル\utility</Filter>
-    </ClInclude>
     <ClInclude Include="content\content_base.hpp">
       <Filter>ヘッダー ファイル\content</Filter>
     </ClInclude>
@@ -74,6 +71,33 @@
     </ClInclude>
     <ClInclude Include="client\common_v1.hpp">
       <Filter>ヘッダー ファイル\client</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\base64.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\radix.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\sha1.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\hmac.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\percent_encoding.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\url_encoded.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\url.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\authentication.hpp">
+      <Filter>ヘッダー ファイル\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.hpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
