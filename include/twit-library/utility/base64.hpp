@@ -12,12 +12,49 @@
 
 namespace oauth{
 namespace utility{
-
+    
 class base64
 {
 public:
     base64(){}
-    ~base64(){}
+    virtual ~base64(){} // = default;
+
+    template<typename InputIterator, typename OutputIterator>
+    OutputIterator encode(InputIterator first, InputIterator last, OutputIterator out)
+    {
+        static const std::string table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        //const size_t length = std::distance(first, last);
+
+        while(first != last)
+        {
+
+                *out++ = table[(*first >> 2) & 0x3F/*0011 1111*/];
+                if(first+1 == last)
+                {
+                    *out++ = table[(*first << 4) & 0x30/*0011 0000*/];
+                    *out++ = '=';
+                    *out++ = '=';
+                    break;
+                }
+                ++first;
+
+                *out++ = table[((*(first-1) << 4) & 0x30/*0011 0000*/) | ((*first >> 4) & 0x0F/*0000 1111*/)];
+                if(first+1 == last)
+                {
+                    *out++ = table[(*first << 2) & 0x3C/*0011 1100*/];
+                    *out++ = '=';
+                    break;
+                }
+                ++first;
+
+                *out++ = table[((*(first-1) << 2) & 0x3C/*0011 1100*/) | ((*first >> 6) & 0x03/*0000 0011*/)];
+                *out++ = table[*first & 0x3F/*0011 1111*/];
+                ++first;
+        }
+
+
+        return out;
+    }
 
     const std::string encode(const std::string& data)
     {
@@ -109,6 +146,17 @@ public:
 private:
     //‚±‚±‚Étable‚ğstatic const std::string‚Å”z’u‚µ‚Ä‰Šú‰»‚µ‚½‚¢(C++11)
 };
+
+
+const std::string base64_encode(const std::string& data)
+{
+    base64 encoder;
+
+    std::string str;
+    std::back_insert_iterator<std::string> out(str);
+    encoder.encode(data.begin(), data.end(), out);
+    return str;
+}
 
 } // namespace utility
 } // namespace oauth
