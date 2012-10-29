@@ -15,53 +15,64 @@
 namespace oauth{
 namespace utility{
 
-
 class percent_encoder
 {
 public:
     percent_encoder(){}
-    ~percent_encoder(){}
+    virtual ~percent_encoder(){};// = default;
 
-    const std::string encode(const std::string& base_string)
+    template<typename InputIterator, typename OutputIterator>
+    OutputIterator encode(InputIterator first, InputIterator last, OutputIterator out)
     {
-        std::string encoded="";
-        for(std::string::const_iterator it = base_string.cbegin();it!=base_string.cend();++it)
+        while(first != last)
         {
-            if((0x30<=*it && *it<=0x39) || (0x41<=*it && *it<=0x5A) || (0x61<=*it && *it<= 0x7A) || *it==0x2D || *it==0x2E || *it==0x5F || *it==0x7E)
-                encoded.append(it,it+1);
+            if((0x30<=*first && *first<=0x39) || (0x41<=*first && *first<=0x5a) || (0x61<=*first && *first<= 0x7a) || *first==0x2d || *first==0x2e || *first==0x5f || *first==0x7e)
+            {
+                *out++ = *first++;
+            }
             else
-                encoded.append((boost::format("%%%02X") % (*it & 0xff)).str());
+            {
+                std::string ss((boost::format("%%%02X") % (*first++ & 0xff)).str());
+                out = std::copy(ss.begin(), ss.end(), out);
+            }
         }
-        return encoded;
+        return out;
     }
 
-    // +¨' '‚É‚Í‚µ‚È‚¢
-    const std::string decode(const std::string& base_string)
+    template<typename InputIterator, typename OutputIterator>
+    OutputIterator decode(InputIterator first, InputIterator last, OutputIterator out)
     {
-        std::string decoded="";
-        for(std::string::const_iterator it = base_string.begin();it!=base_string.end();++it)
+        while(first != last)
         {
-            if(*it == '%') //%xx
+            if(*first == '%') //%xx
             {
-                decoded += (char)hex_to_dec(std::string(it+1,it+3));
-                it+=2;
+                *out++ = (char)hex_to_dec(std::string(first+1,first+3));
+                first+=3;
             }
-            else decoded += *it;
+            else *out++ = *first++;
         }
-        return decoded;
+        return out;
     }
 };
 
-inline const std::string percent_encode(const std::string& base_string)
+inline std::string percent_encode(const std::string& base_string)
 {
     percent_encoder encoder;
-    return encoder.encode(base_string);
+
+    std::string str;
+    std::back_insert_iterator<std::string> out(str);
+    encoder.encode(base_string.cbegin(), base_string.cend(), out);
+    return str;
 }
 
-inline const std::string percent_decode(const std::string& base_string)
+inline std::string percent_decode(const std::string& base_string)
 {
     percent_encoder encoder;
-    return encoder.decode(base_string);
+
+    std::string str;
+    std::back_insert_iterator<std::string> out(str);    
+    encoder.decode(base_string.cbegin(), base_string.cend(), out);
+    return str;
 }
 
 } // namespace utility

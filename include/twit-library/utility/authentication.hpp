@@ -35,7 +35,7 @@ public:
         base_string = method + "&" + percent_encode(uri) + "&" + percent_encode(base_string);
 
         oauth::utility::base64 base64;
-        return base64.encode(scheme_(key,base_string));
+        return base64_encode(scheme_(key,base_string));
     }
 };
 
