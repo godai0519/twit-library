@@ -19,10 +19,37 @@
 namespace oauth{
 namespace utility{    
 
+class generator
+{
+public:
+    std::string operator() (const std::map<std::string,std::string>& data, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "\"")
+    {
+        namespace karma = boost::spirit::karma;
+
+        //BOOST_FOREACH(const std::map<Key,T,Compare,Allocator>::value_type& value, data)
+        //{
+        //    result.append();
+        //}
+        
+        karma::rule key = karma::auto_;
+        karma::rule value = karma::lit(value_container) << karma::auto_ << karma::lit(value_container);
+        karma::rule field = key << karma::lit(key_value_separator) << value;
+        karma::rule body = field % karma::lit(field_separator);
+
+        std::string result;
+        std::back_insert_iterator<std::string> out(result);
+        karma::genarate(out, body, data);
+
+        return result;
+    }
+
+   // std::string urlencoded()
+};
+
 //get_authorization_fieldÇ∆get_urlencodedÇÇ‹Ç∆ÇﬂÇÁÇÍÇªÇ§ÅD
 inline const std::string get_authorization_field(const std::map<std::string,std::string>& values)
 {
-    typedef std::pair<const std::string,std::string> Value_Pair;
+    typedef std::map<K,V>::value_type Value_Pair;
 
     std::string field_string = "";
     BOOST_FOREACH(const Value_Pair& p,values)
