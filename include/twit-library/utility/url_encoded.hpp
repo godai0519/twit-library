@@ -42,8 +42,8 @@ public:
         return result;
     }
 
-   inline std::string urlencode(const std::map<std::string,std::string>& data)
-   {
+    inline std::string urlencode(const std::map<std::string,std::string>& data)
+    {
         std::map<std::string, std::string> encoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
         BOOST_FOREACH(type x, data)
@@ -54,9 +54,9 @@ public:
             encoded_data.insert(std::make_pair<std::string, std::string>(std::move(encoded_key),std::move(encoded_value)));            
         }
         return (*this)(encoded_data);
-   }
-   inline std::string authorization_field(const std::map<std::string,std::string>& data)
-   {
+    }
+    inline std::string authorization_field(const std::map<std::string,std::string>& data)
+    {
         std::map<std::string, std::string> encoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
         BOOST_FOREACH(type x, data)
@@ -67,10 +67,10 @@ public:
             encoded_data.insert(std::make_pair<std::string, std::string>(std::move(encoded_key), std::move(encoded_value)));            
         }
        return (*this)(encoded_data, "=", ",", "\"");
-   }
+    }
 
 private:
-   oauth::utility::percent_encoder encoder_;
+    oauth::utility::percent_encoder encoder_;
 };
 
 class parser
@@ -92,60 +92,35 @@ public:
         return data;
     }
     
-   inline std::map<std::string,std::string> urlencode(const std::string& src)
-   {
-       return (*this)(src);
-   }
-   inline std::map<std::string,std::string> authorization_field(const std::string& src)
-   {
-       return (*this)(src, "=", ",", "\"");
-   }
+    inline std::map<std::string,std::string> urlencode(const std::string& src)
+    {
+        std::map<std::string, std::string> decoded_data;
+        typedef std::map<std::string, std::string>::const_reference type;
+        BOOST_FOREACH(type x, (*this)(src))
+        {
+            std::string decoded_key, decoded_value;
+            encoder_.decode(x.first.cbegin(),  x.first.cend(),  std::back_insert_iterator<std::string>(decoded_key));
+            encoder_.decode(x.second.cbegin(), x.second.cend(), std::back_insert_iterator<std::string>(decoded_value));
+            decoded_data.insert(std::make_pair<std::string, std::string>(std::move(decoded_key), std::move(decoded_value)));            
+        }
+        return decoded_data;
+    }
+    inline std::map<std::string,std::string> authorization_field(const std::string& src)
+    {
+        std::map<std::string, std::string> decoded_data;
+        typedef std::map<std::string, std::string>::const_reference type;
+        BOOST_FOREACH(type x, (*this)(src, "=", ",", "\""))
+        {
+            std::string decoded_key, decoded_value;
+            encoder_.decode(x.first.cbegin(),  x.first.cend(),  std::back_insert_iterator<std::string>(decoded_key));
+            encoder_.decode(x.second.cbegin(), x.second.cend(), std::back_insert_iterator<std::string>(decoded_value));
+            decoded_data.insert(std::make_pair<std::string, std::string>(std::move(decoded_key), std::move(decoded_value)));            
+        }
+        return decoded_data;
+    }
+private:
+    oauth::utility::percent_encoder encoder_;
 };
-
-//
-//
-//
-////get_authorization_fieldÇ∆get_urlencodedÇÇ‹Ç∆ÇﬂÇÁÇÍÇªÇ§ÅD
-//inline const std::string get_authorization_field(const std::map<std::string,std::string>& values)
-//{
-//    typedef std::map<std::string,std::string>::value_type Value_Pair;
-//
-//    std::string field_string = "";
-//    BOOST_FOREACH(const Value_Pair& p,values)
-//        field_string += (percent_encode(p.first) + "=\"" + percent_encode(p.second) + "\",");
-//
-//    if(!field_string.empty()) field_string.erase(field_string.size()-1);
-//    return field_string;
-//}
-//
-//inline const std::string get_urlencoded(const std::map<std::string,std::string>& values)
-//{
-//    typedef std::pair<const std::string,std::string> Value_Pair;
-//    
-//    std::string field_string = "";
-//    BOOST_FOREACH(const Value_Pair& p,values)
-//        field_string += (percent_encode(p.first) + "=" + percent_encode(p.second) + "&");
-//
-//    if(!field_string.empty()) field_string.erase(field_string.size()-1);
-//    return field_string;
-//}
-//
-//inline const std::map<std::string,std::string> parse_urlencoded(const std::string& encoded)
-//{
-//    namespace qi = boost::spirit::qi;
-//
-//    qi::rule<std::string::const_iterator,std::string()> key     = +(qi::char_ - qi::lit("="));
-//    qi::rule<std::string::const_iterator,std::string()> value = +(qi::char_ - qi::lit("&"));
-//    qi::rule<std::string::const_iterator,std::pair<std::string,std::string>()> pair = key >> qi::lit("=") >> value;
-//    qi::rule<std::string::const_iterator,std::map<std::string,std::string>()> rule = pair % qi::lit("&");
-//        
-//    std::string::const_iterator it = encoded.cbegin();
-//    std::map<std::string,std::string> parsed;
-//    std::pair<std::string,std::string> p;
-//    qi::parse(it,encoded.cend(),rule,parsed);
-//
-//    return parsed;
-//}
 
 } // namespace utility
 } // namespace oauth
