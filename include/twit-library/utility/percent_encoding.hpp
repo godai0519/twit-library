@@ -55,6 +55,7 @@ public:
     }
 };
 
+
 inline std::string percent_encode(const std::string& base_string)
 {
     percent_encoder encoder;
@@ -63,6 +64,11 @@ inline std::string percent_encode(const std::string& base_string)
     std::back_insert_iterator<std::string> out(str);
     encoder.encode(base_string.cbegin(), base_string.cend(), out);
     return str;
+}
+inline void percent_encode2(std::string& str)
+{
+    str = percent_encode(str);
+    return;
 }
 
 inline std::string percent_decode(const std::string& base_string)

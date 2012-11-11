@@ -26,14 +26,9 @@ namespace utility{
 class generator
 {
 public:
-    std::string operator() (const std::map<std::string,std::string>& data, boost::function<std::string (const std::string&) > f, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "")
+    std::string operator() (const std::map<std::string,std::string>& data, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "")
     {
         namespace karma = boost::spirit::karma;
-
-        //BOOST_FOREACH(const std::map<Key,T,Compare,Allocator>::value_type& value, data)
-        //{
-        //    result.append();
-        //}
         
         const karma::rule<std::back_insert_iterator<std::string>, std::string()> key = karma::string;
         const karma::rule<std::back_insert_iterator<std::string>, std::string()> value = karma::lit(value_container) << karma::string << karma::lit(value_container);
@@ -49,15 +44,33 @@ public:
 
    inline std::string urlencode(const std::map<std::string,std::string>& data)
    {
-       return (*this)(data, oauth::utility::percent_encode);
+        std::map<std::string, std::string> encoded_data;
+        typedef std::map<std::string, std::string>::const_reference type;
+        BOOST_FOREACH(type x, data)
+        {
+            std::string encoded_key, encoded_value;
+            encoder_.encode(x.first.cbegin(),  x.first.cend(),  std::back_insert_iterator<std::string>(encoded_key));
+            encoder_.encode(x.second.cbegin(), x.second.cend(), std::back_insert_iterator<std::string>(encoded_value));
+            encoded_data.insert(std::make_pair<std::string, std::string>(std::move(encoded_key),std::move(encoded_value)));            
+        }
+        return (*this)(encoded_data);
    }
    inline std::string authorization_field(const std::map<std::string,std::string>& data)
    {
-       return (*this)(data, oauth::utility::percent_encode, "=", ",", "\"");
+        std::map<std::string, std::string> encoded_data;
+        typedef std::map<std::string, std::string>::const_reference type;
+        BOOST_FOREACH(type x, data)
+        {
+            std::string encoded_key, encoded_value;
+            encoder_.encode(x.first.cbegin(),  x.first.cend(),  std::back_insert_iterator<std::string>(encoded_key));
+            encoder_.encode(x.second.cbegin(), x.second.cend(), std::back_insert_iterator<std::string>(encoded_value));
+            encoded_data.insert(std::make_pair<std::string, std::string>(std::move(encoded_key), std::move(encoded_value)));            
+        }
+       return (*this)(encoded_data, "=", ",", "\"");
    }
 
 private:
-    //oauth::utility::percent_encoder encoder_;
+   oauth::utility::percent_encoder encoder_;
 };
 
 class parser
