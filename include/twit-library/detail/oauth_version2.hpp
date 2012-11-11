@@ -36,7 +36,7 @@ public:
         if(!scope.empty())                param["scope"] = scope;       //Option
         if(!state.empty())                param["state"] = state;       //Option
         
-        return uri+"?"+oauth::utility::get_urlencoded(param);
+        return uri + "?" + generator_.urlencode(param);
     }
 
     virtual void code_to_access_token(const std::string& uri, const std::string& code, const std::string& redirect_uri="")
@@ -50,7 +50,7 @@ public:
             ("code",code)
             ("grant_type","authorization_code");
 
-        const auto body = oauth::utility::get_urlencoded(param);
+        const auto body = generator_.urlencode(param);
 
         boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
         {
@@ -78,7 +78,7 @@ protected:
         if(ec) return;
         if(200 <= response->status_code && response->status_code < 300)
         {
-            const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
+            const Param_Type parsed = parser_.urlencode(response->body);
             key_->set_access_token (oauth::utility::percent_decode(parsed.at("access_token")));
         }
         return;
@@ -86,6 +86,8 @@ protected:
 
     boost::shared_ptr<Key_Type> key_;
     boost::shared_ptr<bstcon::client> client_;
+    oauth::utility::generator generator_;
+    oauth::utility::parser parser_;
 };
 
 } // namespace detail

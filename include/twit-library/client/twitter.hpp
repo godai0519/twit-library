@@ -71,7 +71,7 @@ public:
         params.erase("x_auth_username");
         params.erase("x_auth_mode");
 
-        const std::string body = oauth::utility::get_urlencoded(xauth_params);
+        const std::string body = generator_.urlencode(xauth_params);
 
         boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
         {
@@ -80,7 +80,7 @@ public:
             os << "Host: " << URL_Set::get_host() << "\r\n";
             os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
             os << "Content-Length: " << body.length() << "\r\n";
-            os << "Authorization: " << "OAuth " << oauth::utility::get_authorization_field(params) << "\r\n\r\n";
+            os << "Authorization: " << "OAuth " << generator_.authorization_field(params) << "\r\n\r\n";
             os << body;
         }
         
@@ -104,7 +104,7 @@ protected:
         if(ec) return;
         if(200 <= response->status_code && response->status_code < 300)
         {
-            const Param_Type parsed = oauth::utility::parse_urlencoded(response->body);
+            const Param_Type parsed = parser_.urlencode(response->body);
             key_->set_access_token (oauth::utility::percent_decode(parsed.at("oauth_token")));
             key_->set_access_secret(oauth::utility::percent_decode(parsed.at("oauth_token_secret")));
             user_id_ = oauth::utility::percent_decode(parsed.at("user_id"));

@@ -25,6 +25,16 @@
 
 int main()
 {
+    std::map<std::string,std::string> map;
+    map["Test1"] = "Test1";
+    map["Test2"] = "Test2";
+
+    oauth::utility::generator g;
+    std::string generated(g.authorization_field(map));
+
+    oauth::utility::parser p;
+    std::map<std::string,std::string> reparsed(p.authorization_field(generated));
+
     //ただの準備です
     boost::asio::io_service io_service;
     boost::asio::ssl::context ctx(io_service,boost::asio::ssl::context_base::sslv3_client); //SSL用
