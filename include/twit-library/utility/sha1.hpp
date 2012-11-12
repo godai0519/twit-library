@@ -13,13 +13,17 @@
 namespace oauth{
 namespace utility{
 
-class sha1{
-    inline unsigned int left_shift(int bits, unsigned int word)
+class sha1
+{
+private:
+    inline unsigned int left_shift(int bits, unsigned int word) const
     {
         return (((word) << (bits)) | ((word) >> (32-(bits))));
     }
 public:
-    const std::string operator() (std::string data, unsigned long long length)
+    sha1(){}
+    virtual ~sha1(){} // = default;
+    std::string operator() (std::string data, unsigned long long length) const
     {
         // 0x80‚ð‹l‚ß‚é
         data.push_back((char)0x80);

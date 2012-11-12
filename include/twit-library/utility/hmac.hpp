@@ -16,9 +16,12 @@ namespace utility{
 
 template<class Digest>
 class hmac{
-    Digest digest_;
+    const Digest digest_;
 public:
-    const std::string operator() (const std::string& key,const std::string& data)
+    hmac(){}
+    virtual ~hmac(){} // = default;
+
+    std::string operator() (const std::string& key,const std::string& data) const
     {
         std::string k_ipad,k_opad;
         k_ipad = k_opad = (key.length() > 64) ? digest_(key,key.length()) : key;

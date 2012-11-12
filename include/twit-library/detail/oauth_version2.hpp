@@ -79,7 +79,7 @@ protected:
         if(200 <= response->status_code && response->status_code < 300)
         {
             const Param_Type parsed = parser_.urlencode(response->body);
-            key_->set_access_token (oauth::utility::percent_decode(parsed.at("access_token")));
+            key_->set_access_token(parsed.at("access_token"));
         }
         return;
     }

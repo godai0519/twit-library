@@ -26,7 +26,10 @@ namespace utility{
 class generator
 {
 public:
-    std::string operator() (const std::map<std::string,std::string>& data, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "")
+    generator(){}
+    virtual ~generator(){} // =default;
+
+    std::string operator() (const std::map<std::string,std::string>& data, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "") const
     {
         namespace karma = boost::spirit::karma;
         
@@ -42,7 +45,7 @@ public:
         return result;
     }
 
-    inline std::string urlencode(const std::map<std::string,std::string>& data)
+    inline std::string urlencode(const std::map<std::string,std::string>& data) const
     {
         std::map<std::string, std::string> encoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
@@ -55,7 +58,7 @@ public:
         }
         return (*this)(encoded_data);
     }
-    inline std::string authorization_field(const std::map<std::string,std::string>& data)
+    inline std::string authorization_field(const std::map<std::string,std::string>& data) const
     {
         std::map<std::string, std::string> encoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
@@ -70,13 +73,16 @@ public:
     }
 
 private:
-    oauth::utility::percent_encoder encoder_;
+    const oauth::utility::percent_encoder encoder_;
 };
 
 class parser
 {
 public:
-    std::map<std::string,std::string> operator() (const std::string& src, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "")
+    parser(){}
+    virtual ~parser(){} // =default;
+
+    std::map<std::string,std::string> operator() (const std::string& src, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "") const
     {
         namespace qi = boost::spirit::qi;
                 
@@ -92,7 +98,7 @@ public:
         return data;
     }
     
-    inline std::map<std::string,std::string> urlencode(const std::string& src)
+    inline std::map<std::string,std::string> urlencode(const std::string& src) const
     {
         std::map<std::string, std::string> decoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
@@ -105,7 +111,7 @@ public:
         }
         return decoded_data;
     }
-    inline std::map<std::string,std::string> authorization_field(const std::string& src)
+    inline std::map<std::string,std::string> authorization_field(const std::string& src) const
     {
         std::map<std::string, std::string> decoded_data;
         typedef std::map<std::string, std::string>::const_reference type;
@@ -119,7 +125,7 @@ public:
         return decoded_data;
     }
 private:
-    oauth::utility::percent_encoder encoder_;
+    const oauth::utility::percent_encoder encoder_;
 };
 
 } // namespace utility

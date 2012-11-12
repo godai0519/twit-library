@@ -13,29 +13,45 @@
 #include <string>
 #include <boost/foreach.hpp>
 #include <boost/random.hpp>
+#include "base64.hpp"
+#include "url_encoded.hpp"
 
 namespace oauth{
 namespace utility{    
 
 template<class Scheme>
-class signature{
-    Scheme scheme_;
+class signature
+{
+    const Scheme scheme_;
+    const oauth::utility::generator generator_;
+    const oauth::utility::percent_encoder encoder_;
+    const oauth::utility::base64 base64_;
 
 public:
+    signature(){}
+    virtual ~signature(){} // = default;
+
     //Karma使える？のかな
-    const std::string operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values)
+    const std::string operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values) const
     {
-        typedef std::pair<const std::string,std::string> Value_Pair;
-
         std::string base_string;
-        BOOST_FOREACH(const Value_Pair& p,values)
-            base_string += percent_encode(p.first) + "=" + percent_encode(p.second) + "&";
+        {
+            std::back_insert_iterator<std::string> base_out(base_string);
+            std::string value_string(generator_.urlencode(values));
 
-        base_string.erase(base_string.size()-1);
-        base_string = method + "&" + percent_encode(uri) + "&" + percent_encode(base_string);
+            std::copy(method.cbegin(), method.cend(), base_out);
+            *base_out++ = '&';
+            encoder_.encode(uri.cbegin(), uri.cend(), base_out);
+            *base_out++ = '&';
+            encoder_.encode(value_string.cbegin(), value_string.cend(), base_out);
+        }
 
-        oauth::utility::base64 base64;
-        return base64_encode(scheme_(key,base_string));
+        const std::string schemed = scheme_(key,base_string);
+        
+        std::string result;
+        std::back_insert_iterator<std::string> result_out(result);
+        base64_.encode(schemed.cbegin(), schemed.cend(), result_out);
+        return result;
     }
 };
 

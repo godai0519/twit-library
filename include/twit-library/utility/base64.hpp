@@ -20,7 +20,7 @@ public:
     virtual ~base64(){} // = default;
 
     template<typename InputIterator, typename OutputIterator>
-    OutputIterator encode(InputIterator first, InputIterator last, OutputIterator out)
+    OutputIterator encode(InputIterator first, InputIterator last, OutputIterator out) const
     {
         static const std::string table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         //const size_t length = std::distance(first, last);
@@ -56,7 +56,7 @@ public:
         return out;
     }
 
-    const std::string encode(const std::string& data)
+    const std::string encode(const std::string& data) const
     {
         static const std::string table =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -92,7 +92,7 @@ public:
         return result;
     }
     
-    const std::string decode(const std::string& data)
+    const std::string decode(const std::string& data) const
     {
         static const std::string table =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

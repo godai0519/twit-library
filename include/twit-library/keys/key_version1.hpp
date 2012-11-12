@@ -40,7 +40,20 @@ public:
     const std::string get_consumer_secret() const { return consumer_secret_; }
     const std::string get_access_token()        const { return access_token_; }
     const std::string get_access_secret()     const { return access_secret_; }
-    const std::string get_signature_key()     const { return oauth::utility::percent_encode(consumer_secret_) + "&" + oauth::utility::percent_encode(access_secret_);};
+    const std::string get_signature_key()     const
+    {
+        std::string key;
+        std::back_insert_iterator<std::string> out(key);
+
+        encoder_.encode(consumer_secret_.cbegin(), consumer_secret_.cend(), out);
+        *out++ = '&';
+        encoder_.encode(access_secret_.cbegin(),   access_secret_.cend(),   out);
+
+        return key;
+    }
+
+private:
+    const oauth::utility::percent_encoder encoder_;
 };
 
 } // namespace keys
