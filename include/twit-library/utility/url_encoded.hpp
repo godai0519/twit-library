@@ -23,8 +23,8 @@ public:
 
     std::string operator() (const std::map<std::string,std::string>& data, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "") const;
 
-    inline std::string urlencode(const std::map<std::string,std::string>& data) const;
-    inline std::string authorization_field(const std::map<std::string,std::string>& data) const;
+    std::string urlencode(const std::map<std::string,std::string>& data) const;
+    std::string authorization_field(const std::map<std::string,std::string>& data) const;
 
 private:
     const oauth::utility::percent_encoder encoder_;
@@ -38,8 +38,8 @@ public:
 
     std::map<std::string,std::string> operator() (const std::string& src, const std::string& key_value_separator = "=", const std::string& field_separator = "&", const std::string& value_container = "") const;
     
-    inline std::map<std::string,std::string> urlencode(const std::string& src) const;
-    inline std::map<std::string,std::string> authorization_field(const std::string& src) const;
+    std::map<std::string,std::string> urlencode(const std::string& src) const;
+    std::map<std::string,std::string> authorization_field(const std::string& src) const;
 
 private:
     const oauth::utility::percent_encoder encoder_;

@@ -31,6 +31,15 @@
     <Filter Include="ヘッダー ファイル\utility\impl">
       <UniqueIdentifier>{58c214cc-6b68-4317-b643-55779ec606d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\keys\impl">
+      <UniqueIdentifier>{86814921-8514-451c-9012-54b7a16dd3c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\detail\impl">
+      <UniqueIdentifier>{0bee46c2-fc77-442b-8590-8fdfb413cc9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\client\impl">
+      <UniqueIdentifier>{b73cb347-2883-4a0d-8df5-c3af1fdad575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="detail\oauth_version1.hpp">
@@ -130,6 +139,27 @@
     </None>
     <None Include="utility\impl\url_encoded.ipp">
       <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="keys\impl\key_version1.ipp">
+      <Filter>ヘッダー ファイル\keys\impl</Filter>
+    </None>
+    <None Include="keys\impl\key_version2.ipp">
+      <Filter>ヘッダー ファイル\keys\impl</Filter>
+    </None>
+    <None Include="detail\impl\oauth_version1.ipp">
+      <Filter>ヘッダー ファイル\detail\impl</Filter>
+    </None>
+    <None Include="detail\impl\oauth_version2.ipp">
+      <Filter>ヘッダー ファイル\detail\impl</Filter>
+    </None>
+    <None Include="client\impl\common_v1.ipp">
+      <Filter>ヘッダー ファイル\client\impl</Filter>
+    </None>
+    <None Include="client\impl\twitter.ipp">
+      <Filter>ヘッダー ファイル\client\impl</Filter>
+    </None>
+    <None Include="client\impl\yahoo.ipp">
+      <Filter>ヘッダー ファイル\client\impl</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

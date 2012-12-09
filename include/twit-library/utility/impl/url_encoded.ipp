@@ -39,7 +39,7 @@ std::string generator::operator() (const std::map<std::string,std::string>& data
     return result;
 }
 
-inline std::string generator::urlencode(const std::map<std::string,std::string>& data) const
+std::string generator::urlencode(const std::map<std::string,std::string>& data) const
 {
     std::map<std::string, std::string> encoded_data;
     typedef std::map<std::string, std::string>::const_reference type;
@@ -52,7 +52,7 @@ inline std::string generator::urlencode(const std::map<std::string,std::string>&
     }
     return (*this)(encoded_data);
 }
-inline std::string generator::authorization_field(const std::map<std::string,std::string>& data) const
+std::string generator::authorization_field(const std::map<std::string,std::string>& data) const
 {
     std::map<std::string, std::string> encoded_data;
     typedef std::map<std::string, std::string>::const_reference type;
@@ -89,7 +89,7 @@ std::map<std::string,std::string> parser::operator() (const std::string& src, co
     return data;
 }
     
-inline std::map<std::string,std::string> parser::urlencode(const std::string& src) const
+std::map<std::string,std::string> parser::urlencode(const std::string& src) const
 {
     std::map<std::string, std::string> decoded_data;
     typedef std::map<std::string, std::string>::const_reference type;
@@ -102,7 +102,7 @@ inline std::map<std::string,std::string> parser::urlencode(const std::string& sr
     }
     return decoded_data;
 }
-inline std::map<std::string,std::string> parser::authorization_field(const std::string& src) const
+std::map<std::string,std::string> parser::authorization_field(const std::string& src) const
 {
     std::map<std::string, std::string> decoded_data;
     typedef std::map<std::string, std::string>::const_reference type;
