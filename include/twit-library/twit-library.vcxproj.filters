@@ -28,6 +28,9 @@
     <Filter Include="ヘッダー ファイル\content">
       <UniqueIdentifier>{59868790-536e-4a06-b6a3-e220dc4d09ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\utility\impl">
+      <UniqueIdentifier>{58c214cc-6b68-4317-b643-55779ec606d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="detail\oauth_version1.hpp">
@@ -104,5 +107,34 @@
     <None Include="client.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </None>
+    <None Include="utility\impl\base64.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\hmac.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\authentication.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\percent_encoding.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\radix.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\sha1.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\url.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+    <None Include="utility\impl\url_encoded.ipp">
+      <Filter>ヘッダー ファイル\utility\impl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\twit-library.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
