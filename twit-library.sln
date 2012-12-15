@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "twit-library", "include\twit-library\twit-library.vcxproj", "{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample", "sample\sample.vcxproj", "{9091E13C-4F08-4201-81BC-2AB849AFA050}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9} = {EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}
+		{16641C79-954C-4833-80D4-64FDC908700B} = {16641C79-954C-4833-80D4-64FDC908700B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boostconnect", "..\BoostConnect\include\boostconnect\boostconnect.vcxproj", "{16641C79-954C-4833-80D4-64FDC908700B}"
 EndProject
@@ -14,6 +18,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}.Debug|Win32.Build.0 = Debug|Win32
 		{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}.Release|Win32.ActiveCfg = Release|Win32
 		{EF7D8F71-F251-4F94-99CB-D9BE0EBEDBA9}.Release|Win32.Build.0 = Release|Win32
 		{9091E13C-4F08-4201-81BC-2AB849AFA050}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -21,6 +26,7 @@ Global
 		{9091E13C-4F08-4201-81BC-2AB849AFA050}.Release|Win32.ActiveCfg = Release|Win32
 		{9091E13C-4F08-4201-81BC-2AB849AFA050}.Release|Win32.Build.0 = Release|Win32
 		{16641C79-954C-4833-80D4-64FDC908700B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{16641C79-954C-4833-80D4-64FDC908700B}.Debug|Win32.Build.0 = Debug|Win32
 		{16641C79-954C-4833-80D4-64FDC908700B}.Release|Win32.ActiveCfg = Release|Win32
 		{16641C79-954C-4833-80D4-64FDC908700B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection

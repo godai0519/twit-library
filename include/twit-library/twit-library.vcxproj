@@ -5,14 +5,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Main|Win32">
-      <Configuration>Main</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="None|Win32">
-      <Configuration>None</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -24,13 +16,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -46,10 +38,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\OpenSSL-Win32\include;E:\BoostConnect\include;C:\boost\include\boost-1_49;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\include;$(SolutionDir)..\BoostConnect\include;C:\boost\include\boost-1_52;C:\openssl\build\debug\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\OpenSSL-Win32\lib\VC\static;C:\boost\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\boost\lib;C:\openssl\build\debug\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)lib\</OutDir>
+    <TargetName>lib$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)lib\</OutDir>
+    <TargetName>lib$(ProjectName)</TargetName>
+    <IncludePath>$(ProjectDir)..\..\include;$(SolutionDir)..\BoostConnect\include;C:\boost\include\boost-1_52;C:\openssl\build\release\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\boost\lib;C:\openssl\build\release\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -77,6 +77,7 @@
     <ClInclude Include="client\common_v1.hpp" />
     <ClInclude Include="client\twitter.hpp" />
     <ClInclude Include="client\yahoo.hpp" />
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="content\content_base.hpp" />
     <ClInclude Include="content\binary.hpp" />
     <ClInclude Include="content\multipart_content_base.hpp" />
@@ -100,6 +101,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="client.hpp" />
+    <None Include="client\impl\common_v1.ipp" />
+    <None Include="client\impl\twitter.ipp" />
+    <None Include="client\impl\yahoo.ipp" />
+    <None Include="detail\impl\oauth_version1.ipp" />
+    <None Include="detail\impl\oauth_version2.ipp" />
+    <None Include="keys\impl\key_version1.ipp" />
+    <None Include="keys\impl\key_version2.ipp" />
+    <None Include="utility\impl\authentication.ipp" />
+    <None Include="utility\impl\base64.ipp" />
+    <None Include="utility\impl\hmac.ipp" />
+    <None Include="utility\impl\percent_encoding.ipp" />
+    <None Include="utility\impl\radix.ipp" />
+    <None Include="utility\impl\sha1.ipp" />
+    <None Include="utility\impl\url.ipp" />
+    <None Include="utility\impl\url_encoded.ipp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\twit-library.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

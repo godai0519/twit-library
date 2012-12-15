@@ -5,11 +5,10 @@
 // url
 //
 
-#ifndef TWIT_LIB_UTILITY_URL
-#define TWIT_LIB_UTILITY_URL
+#ifndef TWIT_LIB_UTILITY_URL_HPP
+#define TWIT_LIB_UTILITY_URL_HPP
 
 #include <string>
-#include <boost/spirit/include/qi.hpp>
 
 namespace oauth{
 namespace utility{    
@@ -21,41 +20,23 @@ class uri_parser{
     std::string path_;
 
 public:
-    uri_parser(){}
-    uri_parser(const std::string& uri){set_uri(uri);}
-    virtual ~uri_parser(){}
+    uri_parser();
+    uri_parser(const std::string& uri);
+    virtual ~uri_parser();
 
-    bool set_uri(const std::string& uri)
-    {
-        namespace qi = boost::spirit::qi;
-            
-        uri_ = uri;
-        std::string::const_iterator it = uri_.cbegin();
-        bool success = qi::parse(it,uri_.cend(),+(qi::char_ - ":") >> qi::lit(":") >> *qi::lit("/") >> +(qi::char_ - "/") >> +(qi::char_ - "?"),scheme_,host_,path_);
-
-        return success && it == uri_.cend();
-    }
+    bool set_uri(const std::string& uri);
     
-    const std::string get_uri() const
-    {
-        return uri_;
-    }
-    const std::string get_scheme() const
-    {
-        return scheme_;
-    }
-    const std::string get_host() const
-    {
-        return host_;
-    }
-    const std::string get_path() const
-    {
-        return path_;
-    }
+    const std::string get_uri() const;
+    const std::string get_scheme() const;
+    const std::string get_host() const;
+    const std::string get_path() const;
 };
-
 
 } // namespace utility
 } // namespace oauth
+
+#ifdef TWIT_LIB_BUILD
+#include "impl/url.ipp"
+#endif
 
 #endif
