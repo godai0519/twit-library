@@ -1,4 +1,5 @@
-#define USE_SSL_BOOSTCONNECT
+
+#include <twit-library/config.hpp>
 
 #include <twit-library/utility/impl/authentication.ipp>
 #include <twit-library/utility/impl/base64.ipp>
