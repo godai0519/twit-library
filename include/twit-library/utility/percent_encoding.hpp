@@ -27,11 +27,11 @@ public:
     OutputIterator decode(InputIterator first, InputIterator last, OutputIterator out) const;
 };
 
+} // namespace utility
+} // namespace oauth
+
 #ifdef TWIT_LIB_BUILD
 #include "impl/percent_encoding.ipp"
 #endif
-
-} // namespace utility
-} // namespace oauth
 
 #endif
