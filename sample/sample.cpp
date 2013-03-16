@@ -87,9 +87,10 @@ int main()
             "https://userstream.twitter.com/2/user.json",
             std::map<std::string,std::string>(),
             [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{},
-            [](const boost::shared_ptr<bstcon::response> res,const boost::system::error_code&)->void{
+            [](const boost::shared_ptr<bstcon::response> res,const boost::system::error_code&)->bool{
                 std::cout << res->body << std::flush;
                 res->body.erase();
+                return true;
             });
         
         ////送ってみるテスト
