@@ -37,7 +37,7 @@ public:
         const std::string& uri,
         const Param_Type& params,
         RequestHandler handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{},
-        ChunkHandler chunk_handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{}
+        ChunkHandler chunk_handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->bool{ return true; }
     );
 
 protected:
