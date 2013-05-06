@@ -4,6 +4,7 @@
 #include <map>
 #include <boost/assign.hpp>
 #include <boost/bind.hpp>
+#include <boost/make_shared.hpp>
 #include <boostconnect/client.hpp>
 #include "../oauth_version1.hpp"
 #include "../../keys/key_version1.hpp"
@@ -19,7 +20,7 @@ oauth_version1::oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_pt
 }
 oauth_version1::~oauth_version1(){}
 
-void oauth_version1::get_request_token(const std::string& method,const std::string& uri)
+std::future<void> oauth_version1::get_request_token(const std::string& method,const std::string& uri)
 {
     oauth::utility::uri_parser uri_parsed(uri);
 
@@ -44,21 +45,18 @@ void oauth_version1::get_request_token(const std::string& method,const std::stri
     }
 
     boost::system::error_code ec;
+    auto promise = boost::make_shared<std::promise<void>>();
     (*client_)(
         uri_parsed.get_host(),
-        [buf,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
+        [buf,promise,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2));
+            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2,promise));
         });
-
-    //const boost::shared_ptr<bstcon::response> response = 
-    //    client_->operator() (uri_parsed.get_host(),buf,ec,
-    //        boost::bind(&oauth_version1::set_access_token,this,_1,_2));
-
-    return;
+    
+    return promise->get_future();
 }
 
-void oauth_version1::get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code)
+std::future<void> oauth_version1::get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code)
 {
     oauth::utility::uri_parser uri_parsed(uri);
 
@@ -84,20 +82,18 @@ void oauth_version1::get_access_token(const std::string& method,const std::strin
     }
 
     boost::system::error_code ec;
+    auto promise = boost::make_shared<std::promise<void>>();
     (*client_)(
         uri_parsed.get_host(),
-        [buf,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
+        [buf,promise,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2));
+            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2,promise));
         });
-
-    //const boost::shared_ptr<bstcon::response> response = client_->operator() (uri_parsed.get_host(),buf,
-    //        boost::bind(&oauth_version1::set_access_token,this,_1,_2));
-
-    return;
+    
+    return promise->get_future();
 }
 
-void oauth_version1::request_urlencoded(
+std::future<void> oauth_version1::request_urlencoded(
     const std::string& method,
     const std::string& uri,
     const Param_Type& params,
@@ -133,25 +129,35 @@ void oauth_version1::request_urlencoded(
         os << body_string;
     }
 
+    auto promise = boost::make_shared<std::promise<void>>();
     connection = (*client_)(
         uri_parsed.get_host(),
-        [buf,handler,chunk_handler](bstcon::client::connection_ptr connection, boost::system::error_code ec)
+        [buf,promise,handler,chunk_handler](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf,handler,chunk_handler);
+            auto promise_inner = promise;
+            connection->send(
+                buf,
+                [handler, promise_inner](bstcon::client::response_type res, bstcon::client::error_code ec)->void
+                {
+                    promise_inner->set_value();
+                    handler(res, ec);
+                },
+                chunk_handler);
         });
 
-    return;
+    return promise->get_future();
 }
 
-void oauth_version1::set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec)
+void oauth_version1::set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p)
 {
-    if(ec) return;
-    if(200 <= response->status_code && response->status_code < 300)
+    if(!ec && 200 <= response->status_code && response->status_code < 300)
     {
         const Param_Type parsed = parser_.urlencode(response->body);
         key_->set_access_token (parsed.at("oauth_token"));
         key_->set_access_secret(parsed.at("oauth_token_secret"));
     }
+
+    p->set_value();
     return;
 }
 

@@ -46,7 +46,7 @@ std::string twitter::get_screen_name() const
 }
 
 #ifdef USE_SSL_BOOSTCONNECT
-void twitter::get_xauth_token(const std::string& id, const std::string& password, GetTokenHandler handler)
+std::future<void> twitter::get_xauth_token(const std::string& id, const std::string& password)
 {
     Param_Type params = boost::assign::map_list_of
         ("oauth_consumer_key",key_->get_consumer_key())
@@ -83,25 +83,22 @@ void twitter::get_xauth_token(const std::string& id, const std::string& password
         os << "Authorization: " << "OAuth " << generator_.authorization_field(params) << "\r\n\r\n";
         os << body;
     }
-        
+
+    auto promise = boost::make_shared<std::promise<void>>();        
     (*client_)(
         URL_Set::get_host(),
-        [buf,handler,this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
+        [buf,promise,this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&twitter::set_access_token,this,_1,_2,handler));
+            connection->send(buf,boost::bind(&twitter::set_access_token,this,_1,_2,promise));
         });
 
-    //client_->operator() (URL_Set::get_host(),buf,
-    //    boost::bind(&twitter::set_access_token,this,_1,_2,handler));
-        
-    return;
+    return promise->get_future();
 }
 #endif
     
-void twitter::set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec,GetTokenHandler handler)
+void twitter::set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p)
 {
-    if(ec) return;
-    if(200 <= response->status_code && response->status_code < 300)
+    if(!ec && 200 <= response->status_code && response->status_code < 300)
     {
         const Param_Type parsed = parser_.urlencode(response->body);
         key_->set_access_token (parsed.at("oauth_token"));
@@ -109,8 +106,8 @@ void twitter::set_access_token(const boost::shared_ptr<bstcon::response> respons
         user_id_ = parsed.at("user_id");
         screen_name_ = parsed.at("screen_name");
     }
-    handler(response,ec);
 
+    p->set_value();
     return;
 }
 

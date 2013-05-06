@@ -9,6 +9,7 @@
 #define TWIT_LIB_DETAIL_OAUTH_VER_1_HPP
 
 #include <map>
+#include <future>
 #include <boost/assign.hpp>
 #include <boost/noncopyable.hpp>
 #include <boostconnect/client.hpp>
@@ -22,17 +23,16 @@ class oauth_version1 : boost::noncopyable{
 public:
     typedef std::map<std::string,std::string> Param_Type;
     typedef oauth::keys::key_version1 Key_Type;
-    typedef bstcon::connection_type::connection_base::EndHandler GetTokenHandler;
     typedef bstcon::connection_type::connection_base::ChunkHandler ChunkHandler;
     typedef bstcon::connection_type::connection_base::EndHandler RequestHandler;
 
     oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client);
     virtual ~oauth_version1();
 
-    virtual void get_request_token(const std::string& method,const std::string& uri);
-    virtual void get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code);
+    virtual std::future<void> get_request_token(const std::string& method,const std::string& uri);
+    virtual std::future<void> get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code);
 
-    virtual void request_urlencoded(
+    virtual std::future<void> request_urlencoded(
         const std::string& method,
         const std::string& uri,
         const Param_Type& params,
@@ -41,7 +41,7 @@ public:
     );
 
 protected:
-    void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec);
+    void set_access_token(const boost::shared_ptr<bstcon::response> response, const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p);
 
     boost::shared_ptr<Key_Type> key_;
     boost::shared_ptr<bstcon::client> client_;

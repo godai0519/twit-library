@@ -33,11 +33,11 @@ public:
     std::string get_screen_name() const;
 
 #ifdef USE_SSL_BOOSTCONNECT
-    void get_xauth_token(const std::string& id, const std::string& password, GetTokenHandler handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{});
+    std::future<void> get_xauth_token(const std::string& id, const std::string& password);
 #endif
     
 protected:
-    void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec,GetTokenHandler handler);
+    void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p);
 
     std::string user_id_;
     std::string screen_name_;
