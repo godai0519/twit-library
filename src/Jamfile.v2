@@ -1,0 +1,16 @@
+project library
+    : source-location ./
+    ;
+    
+lib twit-libraryd
+    : twit-library.cpp
+    : <variant>debug
+    : <include>C:/openssl/build/debug/include
+    ;
+
+lib twit-library
+    : twit-library.cpp
+    : <variant>release
+    : <include>C:/openssl/build/release/include
+    ;
+    

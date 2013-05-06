@@ -1,0 +1,17 @@
+import os ;
+
+BOOST_ROOT = [ os.environ BOOST_ROOT ] ;
+BSTCON_ROOT =  ../BoostConnect ;
+use-project /boost : $(BOOST_ROOT) ;
+use-project /boostconnect : $(BSTCON_ROOT) ;
+use-project /twitlibrary : ./src ;
+
+project twit-library
+    : requirements
+        <link>static
+        <include>./include
+        <include>$(BSTCON_ROOT)/include
+        <include>C:/boost/include/boost-1_53
+    ;
+    
+install lib : /boostconnect /twitlibrary ;
