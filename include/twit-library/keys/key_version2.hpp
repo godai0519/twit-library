@@ -23,7 +23,7 @@ class key_version2 : boost::noncopyable{
 
 public:
     key_version2();
-    key_version2(const std::string& client_id,const std::string& client_secret);
+    key_version2(const std::string& client_id, const std::string& client_secret);
     ~key_version2();
 
     //setter

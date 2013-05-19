@@ -18,10 +18,10 @@ hmac<Digest>::~hmac() // = default;
 }
 
 template<class Digest>
-std::string hmac<Digest>::operator() (const std::string& key,const std::string& data) const
+std::string hmac<Digest>::operator() (const std::string& key, const std::string& data) const
 {
     std::string k_ipad,k_opad;
-    k_ipad = k_opad = (key.length() > 64) ? digest_(key,key.length()) : key;
+    k_ipad = k_opad = (key.length() > 64) ? digest_(key, key.length()) : key;
     
     while(k_ipad.length()!=64)
     {

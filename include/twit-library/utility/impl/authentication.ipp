@@ -24,7 +24,7 @@ signature<Scheme>::~signature() // = default;
 }
     //KarmaégÇ¶ÇÈÅHÇÃÇ©Ç»
 template<class Scheme>
-const std::string signature<Scheme>::operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values) const
+const std::string signature<Scheme>::operator() (const std::string& method, const std::string& uri, const std::string& key, const std::map<std::string,std::string>& values) const
 {
     std::string base_string;
     {
@@ -38,7 +38,7 @@ const std::string signature<Scheme>::operator() (const std::string& method,const
         encoder_.encode(value_string.cbegin(), value_string.cend(), base_out);
     }
 
-    const std::string schemed = scheme_(key,base_string);
+    const std::string schemed = scheme_(key, base_string);
         
     std::string result;
     std::back_insert_iterator<std::string> result_out(result);
@@ -53,11 +53,11 @@ inline const std::string get_timestamp()
 
 inline const std::string nonce()
 {
-    static const boost::uniform_int<unsigned long> range(0,62-1);
+    static const boost::uniform_int<unsigned long> range(0, 62-1);
     static boost::mt19937 gen(static_cast<unsigned long>(std::time(0)));
     static boost::variate_generator<
         boost::mt19937&,boost::uniform_int<unsigned long>
-    > rand(gen,range);
+    > rand(gen, range);
     static const unsigned char nonce_base[62] = 
     {
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
@@ -71,7 +71,7 @@ inline const std::string nonce()
     while(nonce_length<12) nonce_length = rand();
     result.reserve(nonce_length);
     
-    for(unsigned int i=0;i<nonce_length;++i) result.push_back(nonce_base[rand()]);
+    for(unsigned int i=0; i<nonce_length; ++i) result.push_back(nonce_base[rand()]);
     return result;
 }
 

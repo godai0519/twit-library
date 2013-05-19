@@ -25,9 +25,6 @@
     <Filter Include="ヘッダー ファイル\client">
       <UniqueIdentifier>{6c3a1b3c-928b-4c9b-a9b3-50df625dde74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\content">
-      <UniqueIdentifier>{59868790-536e-4a06-b6a3-e220dc4d09ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\utility\impl">
       <UniqueIdentifier>{58c214cc-6b68-4317-b643-55779ec606d3}</UniqueIdentifier>
     </Filter>
@@ -56,24 +53,6 @@
     </ClInclude>
     <ClInclude Include="keys\key_version2.hpp">
       <Filter>ヘッダー ファイル\keys</Filter>
-    </ClInclude>
-    <ClInclude Include="content\content_base.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
-    </ClInclude>
-    <ClInclude Include="content\urlencoded.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
-    </ClInclude>
-    <ClInclude Include="content\multipart_form_data.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
-    </ClInclude>
-    <ClInclude Include="content\multipart_content_base.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
-    </ClInclude>
-    <ClInclude Include="content\binary.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
-    </ClInclude>
-    <ClInclude Include="content\text.hpp">
-      <Filter>ヘッダー ファイル\content</Filter>
     </ClInclude>
     <ClInclude Include="client\yahoo.hpp">
       <Filter>ヘッダー ファイル\client</Filter>

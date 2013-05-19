@@ -19,16 +19,16 @@ namespace detail{
 
 class oauth_version2 : boost::noncopyable{
 public:
-    typedef oauth::keys::key_version2 Key_Type;
+    typedef oauth::keys::key_version2         Key_Type;
     typedef std::map<std::string,std::string> Param_Type;
-    oauth_version2(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client);
+    oauth_version2(const boost::shared_ptr<Key_Type> &key, const boost::shared_ptr<bstcon::client> &client);
     virtual ~oauth_version2();
 
-    virtual const std::string authorization_request_uri(const std::string& uri,const std::string& response_type,const std::string& redirect_uri="",const std::string& scope="",const std::string& state="");
+    virtual const std::string authorization_request_uri(const std::string& uri, const std::string& response_type, const std::string& redirect_uri="", const std::string& scope="", const std::string& state="");
     virtual void code_to_access_token(const std::string& uri, const std::string& code, const std::string& redirect_uri="");
     
 protected:
-    void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec);
+    void set_access_token(const boost::shared_ptr<bstcon::response> response, const boost::system::error_code& ec);
 
     boost::shared_ptr<Key_Type> key_;
     boost::shared_ptr<bstcon::client> client_;

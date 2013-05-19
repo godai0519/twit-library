@@ -12,11 +12,11 @@ namespace keys{
 key_version1::key_version1()
 {
 }
-key_version1::key_version1(const std::string& consumer_key,const std::string& consumer_secret)
+key_version1::key_version1(const std::string& consumer_key, const std::string& consumer_secret)
     : consumer_key_(consumer_key), consumer_secret_(consumer_secret)
 {
 }
-key_version1::key_version1(const std::string& consumer_key,const std::string& consumer_secret,const std::string& access_token,const std::string& access_secret)
+key_version1::key_version1(const std::string& consumer_key, const std::string& consumer_secret, const std::string& access_token, const std::string& access_secret)
     : consumer_key_ (consumer_key), consumer_secret_(consumer_secret), access_token_(access_token), access_secret_(access_secret)
 {
 }

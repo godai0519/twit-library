@@ -23,8 +23,8 @@ class key_version1 : boost::noncopyable{
 
 public:
     key_version1();
-    key_version1(const std::string& consumer_key,const std::string& consumer_secret);
-    key_version1(const std::string& consumer_key,const std::string& consumer_secret,const std::string& access_token,const std::string& access_secret);
+    key_version1(const std::string& consumer_key, const std::string& consumer_secret);
+    key_version1(const std::string& consumer_key, const std::string& consumer_secret, const std::string& access_token, const std::string& access_secret);
     virtual ~key_version1();
     
     //setter

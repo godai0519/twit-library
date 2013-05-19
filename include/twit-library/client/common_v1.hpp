@@ -16,7 +16,7 @@ namespace client{
 template<class URL_Set>
 class common_v1: public oauth::detail::oauth_version1{
 public:
-    common_v1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client);
+    common_v1(const boost::shared_ptr<Key_Type>& key, const boost::shared_ptr<bstcon::client>& client);
     virtual ~common_v1();
     
     virtual void get_request_token();

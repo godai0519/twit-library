@@ -21,7 +21,7 @@ class hmac
 public:
     hmac();
     virtual ~hmac(); // = default;
-    std::string operator() (const std::string& key,const std::string& data) const;
+    std::string operator() (const std::string& key, const std::string& data) const;
 };
 
 typedef hmac<sha1> hmac_sha1;

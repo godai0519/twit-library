@@ -21,23 +21,23 @@ namespace detail{
 
 class oauth_version1 : boost::noncopyable{
 public:
-    typedef std::map<std::string,std::string> Param_Type;
-    typedef oauth::keys::key_version1 Key_Type;
+    typedef std::map<std::string, std::string>                     Param_Type;
+    typedef oauth::keys::key_version1                              Key_Type;
     typedef bstcon::connection_type::connection_base::ChunkHandler ChunkHandler;
-    typedef bstcon::connection_type::connection_base::EndHandler RequestHandler;
+    typedef bstcon::connection_type::connection_base::EndHandler   RequestHandler;
 
-    oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client);
+    oauth_version1(const boost::shared_ptr<Key_Type>& key, const boost::shared_ptr<bstcon::client>& client);
     virtual ~oauth_version1();
 
-    virtual std::future<void> get_request_token(const std::string& method,const std::string& uri);
-    virtual std::future<void> get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code);
+    virtual std::future<void> get_request_token(const std::string& method, const std::string& uri);
+    virtual std::future<void> get_access_token(const std::string& method, const std::string& uri, const std::string& pin_code);
 
     virtual std::future<void> request_urlencoded(
         const std::string& method,
         const std::string& uri,
         const Param_Type& params,
-        RequestHandler handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->void{},
-        ChunkHandler chunk_handler = [](const boost::shared_ptr<bstcon::response>,const boost::system::error_code&)->bool{ return true; }
+        RequestHandler handler = [](const boost::shared_ptr<bstcon::response>, const boost::system::error_code&)->void{},
+        ChunkHandler chunk_handler = [](const boost::shared_ptr<bstcon::response>, const boost::system::error_code&)->bool{ return true; }
     );
 
 protected:
@@ -45,6 +45,7 @@ protected:
 
     boost::shared_ptr<Key_Type> key_;
     boost::shared_ptr<bstcon::client> client_;
+    
     oauth::utility::signature<oauth::utility::hmac_sha1> signature_;
     oauth::utility::generator generator_;
     oauth::utility::parser parser_;

@@ -9,8 +9,8 @@ namespace oauth{
 namespace client{
 
 template<class URL_Set>
-common_v1<URL_Set>::common_v1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
-    : oauth_version1(key,client)
+common_v1<URL_Set>::common_v1(const boost::shared_ptr<Key_Type>& key, const boost::shared_ptr<bstcon::client>& client)
+    : oauth_version1(key, client)
 {
 }
 template<class URL_Set>
@@ -23,7 +23,7 @@ void common_v1<URL_Set>::get_request_token()
 {
     oauth_version1::get_request_token(
         URL_Set::get_request_method(),
-        client_->service_protocol()+"://"+URL_Set::get_host()+URL_Set::get_request_path()
+        client_->service_protocol() + "://" + URL_Set::get_host() + URL_Set::get_request_path()
         );
 }
 
@@ -32,7 +32,7 @@ void common_v1<URL_Set>::get_access_token(const std::string& pin_code)
 {
     oauth_version1::get_access_token(
         URL_Set::get_access_method(),
-        client_->service_protocol()+"://"+URL_Set::get_host()+URL_Set::get_access_path(),
+        client_->service_protocol() + "://" + URL_Set::get_host() + URL_Set::get_access_path(),
         pin_code
         );
 }

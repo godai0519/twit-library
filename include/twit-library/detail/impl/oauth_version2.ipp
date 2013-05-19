@@ -3,30 +3,32 @@
 
 #include <map>
 #include <boost/assign.hpp>
-#include <boost/shared_ptr.hpp>
+#include <boost/bind.hpp>
+#include <boost/make_shared.hpp>
 #include <boostconnect/client.hpp>
 #include "../oauth_version2.hpp"
 #include "../../keys/key_version2.hpp"
+#include "../../utility.hpp"
 
 namespace oauth{
 namespace detail{
 
-oauth_version2::oauth_version2(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
+oauth_version2::oauth_version2(const boost::shared_ptr<Key_Type> &key, const boost::shared_ptr<bstcon::client> &client)
 {
     key_ = key;
     client_ = client;
 }
 oauth_version2::~oauth_version2(){}
 
-const std::string oauth_version2::authorization_request_uri(const std::string& uri,const std::string& response_type,const std::string& redirect_uri,const std::string& scope,const std::string& state)
+const std::string oauth_version2::authorization_request_uri(const std::string& uri, const std::string& response_type, const std::string& redirect_uri, const std::string& scope, const std::string& state)
 {
     Param_Type param = boost::assign::map_list_of
-        ("client_id"        ,key_->get_client_id())
-        ("response_type",response_type);
+        ("client_id"     ,key_->get_client_id())
+        ("response_type" ,response_type);
 
     if(!redirect_uri.empty()) param["redirect_uri"] = redirect_uri; //MAY
-    if(!scope.empty())                param["scope"] = scope;       //Option
-    if(!state.empty())                param["state"] = state;       //Option
+    if(!scope.empty())        param["scope"] = scope;               //Option
+    if(!state.empty())        param["state"] = state;               //Option
         
     return uri + "?" + generator_.urlencode(param);
 }
@@ -41,30 +43,23 @@ void oauth_version2::code_to_access_token(const std::string& uri, const std::str
         ("redirect_uri",redirect_uri)
         ("code",code)
         ("grant_type","authorization_code");
-
-    const auto body = generator_.urlencode(param);
-
-    boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
-    {
-        std::ostream os(buf.get());
-        os << "POST " << uri_parsed.get_path() << " HTTP/1.1" << "\r\n";
-        os << "Host: " << uri_parsed.get_host() << "\r\n";
-        os << "Content-Length: " << body.length() << "\r\n";
-        os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n\r\n";
-        os << body;
-    }
+    
+    auto request = boost::make_shared<bstcon::request>("POST", uri_parsed.get_path(), generator_.urlencode(param));
+    boost::assign::insert(request->header)
+        ("Content-Length", std::to_string(request->body.length()))
+        ("Content-Type: ", "application/x-www-form-urlencoded");
     
     (*client_)(
         uri_parsed.get_host(),
-        [buf,this](bstcon::connection_type::connection_base::connection_ptr connection, boost::system::error_code ec)
+        [request, this](bstcon::connection_type::connection_base::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf, boost::bind(&oauth_version2::set_access_token,this,_1,_2));
+            connection->send(*request, boost::bind(&oauth_version2::set_access_token, this, _1, _2));
         });
         
-return;
+    return;
 }
 
-void oauth_version2::set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec)
+void oauth_version2::set_access_token(const boost::shared_ptr<bstcon::response> response, const boost::system::error_code& ec)
 {
     if(ec) return;
     if(200 <= response->status_code && response->status_code < 300)

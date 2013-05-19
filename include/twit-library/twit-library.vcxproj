@@ -141,12 +141,6 @@
     <ClInclude Include="client\twitter.hpp" />
     <ClInclude Include="client\yahoo.hpp" />
     <ClInclude Include="config.hpp" />
-    <ClInclude Include="content\content_base.hpp" />
-    <ClInclude Include="content\binary.hpp" />
-    <ClInclude Include="content\multipart_content_base.hpp" />
-    <ClInclude Include="content\multipart_form_data.hpp" />
-    <ClInclude Include="content\text.hpp" />
-    <ClInclude Include="content\urlencoded.hpp" />
     <ClInclude Include="detail\oauth_version1.hpp" />
     <ClInclude Include="detail\oauth_version2.hpp" />
     <ClInclude Include="keys.hpp" />

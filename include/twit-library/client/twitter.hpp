@@ -26,7 +26,7 @@ class twitter : public oauth::client::common_v1<oauth::twitter_set>{
     typedef oauth::client::common_v1<oauth::twitter_set> MyParent;
     typedef oauth::twitter_set URL_Set;
 public:
-    twitter(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client);
+    twitter(const boost::shared_ptr<Key_Type>& key, const boost::shared_ptr<bstcon::client>& client);
     virtual ~twitter();
 
     std::string get_user_id() const;
@@ -37,7 +37,7 @@ public:
 #endif
     
 protected:
-    void set_access_token(const boost::shared_ptr<bstcon::response> response,const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p);
+    void set_access_token(const boost::shared_ptr<bstcon::response> response, const boost::system::error_code& ec, boost::shared_ptr<std::promise<void>> p);
 
     std::string user_id_;
     std::string screen_name_;

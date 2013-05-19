@@ -29,7 +29,7 @@ public:
     virtual ~signature(); // = default;
 
     //Karma使える？のかな
-    const std::string operator() (const std::string& method,const std::string& uri,const std::string& key,const std::map<std::string,std::string>& values) const;
+    const std::string operator() (const std::string& method, const std::string& uri, const std::string& key, const std::map<std::string,std::string>& values) const;
 };
 
 inline const std::string get_timestamp();

@@ -40,7 +40,7 @@ OutputIterator percent_encoder::decode(InputIterator first, InputIterator last, 
     {
         if(*first == '%') //%xx
         {
-            *out++ = (char)hex_to_dec(std::string(first+1,first+3));
+            *out++ = (char)hex_to_dec(std::string(first+1, first+3));
             first+=3;
         }
         else *out++ = *first++;

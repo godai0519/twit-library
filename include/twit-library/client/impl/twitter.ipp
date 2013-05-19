@@ -28,7 +28,7 @@ std::string twitter_set::get_access_path()
     return "/oauth/access_token";
 }
 
-twitter::twitter(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
+twitter::twitter(const boost::shared_ptr<Key_Type>& key, const boost::shared_ptr<bstcon::client>& client)
     : MyParent(key,client)
 {
 }
@@ -71,25 +71,24 @@ std::future<void> twitter::get_xauth_token(const std::string& id, const std::str
     params.erase("x_auth_username");
     params.erase("x_auth_mode");
 
-    const std::string body = generator_.urlencode(xauth_params);
+    auto request = boost::make_shared<bstcon::request>(
+        URL_Set::get_access_method(),
+        URL_Set::get_access_path(),
+        generator_.urlencode(xauth_params)
+        );
 
-    boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
-    {
-        std::ostream os(buf.get());
-        os << URL_Set::get_access_method() << " " << URL_Set::get_access_path() << " HTTP/1.1" << "\r\n";
-        os << "Host: " << URL_Set::get_host() << "\r\n";
-        os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-        os << "Content-Length: " << body.length() << "\r\n";
-        os << "Authorization: " << "OAuth " << generator_.authorization_field(params) << "\r\n\r\n";
-        os << body;
-    }
+    boost::assign::insert(request->header)
+        ("Content-Type", "application/x-www-form-urlencoded")
+        ("Content-Length", std::to_string(request->body.length()))
+        ("Authorization", "OAuth " + generator_.authorization_field(params));
 
     auto promise = boost::make_shared<std::promise<void>>();        
     (*client_)(
         URL_Set::get_host(),
-        [buf,promise,this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
+        [request, promise, this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&twitter::set_access_token,this,_1,_2,promise));
+            connection->send(*request, boost::bind(&twitter::set_access_token, this, _1, _2, promise));
+            return;
         });
 
     return promise->get_future();

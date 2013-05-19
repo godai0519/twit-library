@@ -13,81 +13,73 @@
 namespace oauth{
 namespace detail{
 
-oauth_version1::oauth_version1(boost::shared_ptr<Key_Type> &key,boost::shared_ptr<bstcon::client> &client)
+oauth_version1::oauth_version1(const boost::shared_ptr<Key_Type> &key, const boost::shared_ptr<bstcon::client> &client)
 {
     key_ = key;
     client_ = client;
 }
 oauth_version1::~oauth_version1(){}
 
-std::future<void> oauth_version1::get_request_token(const std::string& method,const std::string& uri)
+std::future<void> oauth_version1::get_request_token(const std::string& method, const std::string& uri)
 {
     oauth::utility::uri_parser uri_parsed(uri);
 
     Param_Type params = boost::assign::map_list_of
-        ("oauth_consumer_key",key_->get_consumer_key())
-        ("oauth_signature_method","HMAC-SHA1")
-        ("oauth_timestamp",oauth::utility::get_timestamp())
-        ("oauth_nonce",oauth::utility::nonce())
-        ("oauth_callback","oob")
-        ("oauth_version","1.0");
+        ("oauth_consumer_key", key_->get_consumer_key())
+        ("oauth_signature_method", "HMAC-SHA1")
+        ("oauth_timestamp", oauth::utility::get_timestamp())
+        ("oauth_nonce", oauth::utility::nonce())
+        ("oauth_callback", "oob")
+        ("oauth_version", "1.0");
         
     boost::assign::insert(params)
-        ("oauth_signature",signature_(method,uri,key_->get_signature_key(),params));
+        ("oauth_signature",signature_(method, uri, key_->get_signature_key(), params));
 
-    boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
-    {
-        std::ostream os(buf.get());
-        os << method << " " << uri_parsed.get_path() << " HTTP/1.1" << "\r\n";
-        os << "Host: " << uri_parsed.get_host() << "\r\n";
-        os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-        os << "Authorization: " << "OAuth " << generator_.authorization_field(params) << "\r\n\r\n";
-    }
-
-    boost::system::error_code ec;
+    auto request = boost::make_shared<bstcon::request>(method, uri_parsed.get_path(), "");
+    boost::assign::insert(request->header)
+        ("Content-Type", "application/x-www-form-urlencoded")
+        ("Authorization", "OAuth " + generator_.authorization_field(params));
+    
     auto promise = boost::make_shared<std::promise<void>>();
     (*client_)(
         uri_parsed.get_host(),
-        [buf,promise,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
+        [request, promise, this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2,promise));
+            connection->send(*request, boost::bind(&oauth_version1::set_access_token, this, _1, _2, promise));
+            return;
         });
     
     return promise->get_future();
 }
 
-std::future<void> oauth_version1::get_access_token(const std::string& method,const std::string& uri,const std::string& pin_code)
+std::future<void> oauth_version1::get_access_token(const std::string& method, const std::string& uri, const std::string& pin_code)
 {
     oauth::utility::uri_parser uri_parsed(uri);
 
     Param_Type params = boost::assign::map_list_of
-        ("oauth_consumer_key",key_->get_consumer_key())
-        ("oauth_token",key_->get_access_token())
-        ("oauth_signature_method","HMAC-SHA1")
-        ("oauth_timestamp",oauth::utility::get_timestamp())
-        ("oauth_verifier",pin_code)
-        ("oauth_nonce",oauth::utility::nonce())
-        ("oauth_version","1.0");
+        ("oauth_consumer_key", key_->get_consumer_key())
+        ("oauth_token", key_->get_access_token())
+        ("oauth_signature_method", "HMAC-SHA1")
+        ("oauth_timestamp", oauth::utility::get_timestamp())
+        ("oauth_verifier", pin_code)
+        ("oauth_nonce", oauth::utility::nonce())
+        ("oauth_version", "1.0");
         
     boost::assign::insert(params)
-        ("oauth_signature",signature_(method,uri,key_->get_signature_key(),params));
-
-    boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
-    {
-        std::ostream os(buf.get());
-        os << method << " " << uri_parsed.get_path() << " HTTP/1.1" << "\r\n";
-        os << "Host: " << uri_parsed.get_host() << "\r\n";
-        os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-        os << "Authorization: " << "OAuth " << generator_.authorization_field(params) << "\r\n\r\n";
-    }
-
-    boost::system::error_code ec;
+        ("oauth_signature", signature_(method, uri, key_->get_signature_key(), params));
+    
+    auto request = boost::make_shared<bstcon::request>(method, uri_parsed.get_path(), "");
+    boost::assign::insert(request->header)
+        ("Content-Type", "application/x-www-form-urlencoded")
+        ("Authorization", "OAuth " + generator_.authorization_field(params));
+    
     auto promise = boost::make_shared<std::promise<void>>();
     (*client_)(
         uri_parsed.get_host(),
-        [buf,promise,this](bstcon::client::connection_ptr connection,boost::system::error_code ec)
+        [request, promise, this](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
-            connection->send(buf,boost::bind(&oauth_version1::set_access_token,this,_1,_2,promise));
+            connection->send(*request, boost::bind(&oauth_version1::set_access_token, this, _1, _2, promise));
+            return;
         });
     
     return promise->get_future();
@@ -117,26 +109,26 @@ std::future<void> oauth_version1::request_urlencoded(
     boost::assign::insert(header_params)
         ("oauth_signature",signature_(method,uri_parsed.get_scheme()+"://"+uri_parsed.get_host()+uri_parsed.get_path(),key_->get_signature_key(),signature_param));
 
-    const std::string body_string = (method!="GET") ? generator_.urlencode(params) : "";
-    boost::shared_ptr<boost::asio::streambuf> buf(new boost::asio::streambuf());
-    {
-        std::ostream os(buf.get());
-        os << method << " " << uri_parsed.get_path() << ((method=="GET") ? "?"+generator_.urlencode(params) : "") << " HTTP/1.1" << "\r\n";
-        os << "Host: " << uri_parsed.get_host() << "\r\n";
-        os << "Content-Length: " << body_string.size() << "\r\n";
-        os << "Content-Type: " << "application/x-www-form-urlencoded" << "\r\n";
-        os << "Authorization: " << "OAuth " << generator_.authorization_field(header_params) << "\r\n\r\n";
-        os << body_string;
-    }
+    
+    auto request = boost::make_shared<bstcon::request>(
+        method,
+        uri_parsed.get_path() + ((method=="GET") ? "?" + generator_.urlencode(params) : ""),
+        (method != "GET") ? generator_.urlencode(params) : ""
+        );
+
+    boost::assign::insert(request->header)
+        ("Content-Length", std::to_string(request->body.size()))
+        ("Content-Type", "application/x-www-form-urlencoded")
+        ("Authorization", "OAuth " + generator_.authorization_field(header_params));
 
     auto promise = boost::make_shared<std::promise<void>>();
     connection = (*client_)(
         uri_parsed.get_host(),
-        [buf,promise,handler,chunk_handler](bstcon::client::connection_ptr connection, boost::system::error_code ec)
+        [request, promise, handler, chunk_handler](bstcon::client::connection_ptr connection, boost::system::error_code ec)
         {
             auto promise_inner = promise;
             connection->send(
-                buf,
+                *request,
                 [handler, promise_inner](bstcon::client::response_type res, bstcon::client::error_code ec)->void
                 {
                     promise_inner->set_value();

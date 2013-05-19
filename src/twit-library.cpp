@@ -1,4 +1,3 @@
-
 #include <twit-library/config.hpp>
 
 #include <twit-library/utility/impl/authentication.ipp>

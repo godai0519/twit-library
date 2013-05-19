@@ -10,7 +10,7 @@ namespace keys{
 key_version2::key_version2()
 {
 }
-key_version2::key_version2(const std::string& client_id,const std::string& client_secret)
+key_version2::key_version2(const std::string& client_id, const std::string& client_secret)
         : client_id_(client_id), client_secret_(client_secret)
 {
 }
